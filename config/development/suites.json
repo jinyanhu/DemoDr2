@@ -1,0 +1,14 @@
+{
+    "case_1": {
+        "title": "wwwarehouse",
+        "report_file": "wwwarehouse",
+        "cases": {
+            "wwwarehouse": [
+                "usercenter.user_login_service"
+            ]
+        },
+        "receivers": ["zhihe.zhang@wwwarehouse.com", "chengling.lei@wwwarehouse.com", "xiaodong.wang@wwwarehouse.com",
+        "wangchao.xu@wwwarehouse.com", "yongyong.zhang@wwwarehouse.com", "snowy.yuan@wwwarehouse.com", "xinshun.lv@wwwarehouse.com"],
+        "group":[]
+    }
+}

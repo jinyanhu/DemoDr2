@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>wwwarehouse</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link type="text/css" rel="stylesheet" href="http://qa-demo.web.sdp.101.com/assets/pyunit.css" />
+    <script type="text/javascript" src="http://qa-demo.web.sdp.101.com/assets/jquery.min.js"></script>
+    <script type="text/javascript" src="http://qa-demo.web.sdp.101.com/assets/pyunit.js"></script>
+    
+</head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+/*
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+*/
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+--></script>
+
+
+<div class='heading'>
+<h1>wwwarehouse</h1>
+
+<p class='attribute'><strong>该次测试执行于:</strong> 2017-07-13 11:13:32</p>
+<p class='attribute'><strong>接口运行时间:</strong> 0:00:00.390989</p>
+<p class='attribute'><strong>状态:</strong> 通过 12</p>
+
+
+<p class='description'></p>
+</div>
+
+
+
+<p id='show_detail_line'>显示：
+<a href='javascript:showCase(0)'>概要信息</a>
+<a href='javascript:showCase(1)'>失败的测试</a>
+<a href='javascript:showCase(2)'>所有测试</a>
+</p>
+<table id='result_table'>
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+
+<tr id='header_row'>
+    <td>测试套件集/测试用例</td>
+    <td>统计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>更多</td>
+</tr>
+
+<tr class='passClass'>
+    <td>wwwarehouse.usercenter.user_login_service.TestUserRegisterService</td>
+    <td>12</td>
+    <td>12</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c1',12)" class="detail-link">查看详情</a></td>
+</tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_account_lock_ok(账号锁定)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >通过</a>
+    <div id='div_pt1.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.1: None&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_account_unlock_ok(账号解锁)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.2')" >通过</a>
+    <div id='div_pt1.2' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.2').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.2: None&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_get_account_lock_locked_ok(账号锁定时，获取账号锁定情况)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.3')" >通过</a>
+    <div id='div_pt1.3' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.3').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.3: {"data": "{'status': '\u9501\u5b9a', 'lockReason': 'dubbo\u9501\u5b9a\u8d26\u53f7', 'lockedTime': '2017-07-13 11:13:32'}", "params": "None", "msg": "None", "body": "None", "code": "0"}&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_get_account_lock_unlocked_ok(账号未锁定时，获取账号锁定情况)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.4')" >通过</a>
+    <div id='div_pt1.4' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.4').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.4: &lt;pyhessian.protocol.Fault: "ServiceException: 账号已解锁,请勿重复操作"&gt;&lt;br&gt;&lt;pyhessian.protocol.Fault: "ServiceException: 账号未锁定,无需解锁"&gt;&lt;br&gt;&lt;pyhessian.protocol.Fault: "ServiceException: 账号未锁定,无需解锁"&gt;&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_get_cm_user_by_mobile_ok(根据mobile获取用户信息)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.5')" >通过</a>
+    <div id='div_pt1.5' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.5').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.5: {"password": "57BA5ADA8A97B90CAD0D74BE7A168A8D", "registeTime": "2017-07-05 16:00:00", "mobile": "18888888888", "userId": "10000001", "status": "1", "faceUkid": "None", "createTime": "2017-07-05 16:00:00", "lockReason": "dubbo\u89e3\u9501\u8d26\u53f7", "createUserId": "None", "lockedTime": "2017-07-13 03:13:32", "passwordUpdateTime": "2017-07-13 02:46:05", "lastLoginFailTime": "2017-07-12 01:34:08", "passwordErrorTimes": "0", "registeMac": "None", "updateUserId": "16100603956", "registeIp": "None", "updateTime": "2017-07-13 03:13:32"}&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_get_cm_user_by_user_id_ok(根据userId获取用户信息)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.6')" >通过</a>
+    <div id='div_pt1.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.6: {"password": "74774AC40CD4DE7D7FCB4F97FFDF1FA0", "registeTime": "2017-07-04 03:50:22", "mobile": "18268250000", "userId": "16100603956", "status": "1", "faceUkid": "52011807205320000", "createTime": "2017-07-04 03:50:22", "lockReason": "None", "createUserId": "16100603956", "lockedTime": "None", "passwordUpdateTime": "2017-07-04 03:50:22", "lastLoginFailTime": "2017-07-04 03:50:22", "passwordErrorTimes": "0", "registeMac": "12:32:32", "updateUserId": "None", "registeIp": "119.239.9.0", "updateTime": "2017-07-04 03:50:22"}&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_get_verification_ok(获取图片验证码)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.7')" >通过</a>
+    <div id='div_pt1.7' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.7').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.7: hn7X&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.8' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_insert_cm_login_log_ok(插入日志)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.8')" >通过</a>
+    <div id='div_pt1.8' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.8').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.8: None&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_is_mobile_platform_ok(平台是否移动平台)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.9')" >通过</a>
+    <div id='div_pt1.9' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.9').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.9: True&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_is_valid_platform_ok(是否合法的平台)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.10')" >通过</a>
+    <div id='div_pt1.10' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.10').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.10: True&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_scan_code_ok(PC端请求二维码)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.11')" >通过</a>
+    <div id='div_pt1.11' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.11').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.11: {"data": "{'securityQrCode': 'aDlvsExVbJ3dl/toUdN/T4GAavWb5iCdvu/Vj0bg0PmvADBABtImf/8USvNkVQj7Sf7Klir//SqAlDzp4XFsuQuGyo/hdjwK5fte+ByZgQduyJy4MKkkmXIODon53vj8goDVBmLEsviTyUq5/jq/L4ufIj6DgToyc6pe6tpBtfg=', 'successScan': '0', 'userId': '0'}", "params": "None", "msg": "None", "body": "None", "code": "0"}&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='pt1.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_update_password_ok(修改密码)</div></td>
+
+    <td colspan='4' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.12')" >通过</a>
+    <div id='div_pt1.12' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.12').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <div class="error-info">
+        &lt;br&gt;pt1.12: None&lt;br&gt;&lt;br&gt;
+        </div>
+    </div>
+    <!--css div popup end-->
+    </td>
+
+    <td colspan='1' align='center'><div class='spendTime'>1</div></td>
+</tr>
+
+<tr id='total_row'>
+    <td>Total</td>
+    <td>12</td>
+    <td>12</td>
+    <td>0</td>
+    <td>0</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+
+
+
+</body>
+</html>
