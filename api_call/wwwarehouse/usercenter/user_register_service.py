@@ -1,7 +1,8 @@
-from api_call.wwwarehouse.base import BaseHessian
-from cof.hessian_util import *
 from pyhessian import protocol
 from pyhessian.data_types import long
+
+from api_call.wwwarehouse.base import BaseHessian
+from utils.hessian_util import *
 
 __author__ = "zzh"
 

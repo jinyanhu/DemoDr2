@@ -134,7 +134,7 @@ def utc_time():
     .. code-block:: python
         :linenos:
 
-        >>> from cof.co_time import utc_time
+        >>> from utils.co_time import utc_time
         >>> print utc_time()
 
     :return:

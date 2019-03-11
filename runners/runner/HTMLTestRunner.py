@@ -74,7 +74,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # URL: http://tungwaiyip.info/software/HTMLTestRunner.html
 
-__author__ = "Wai Yip Tung"
+
 __version__ = "0.8.2"
 
 """
@@ -100,7 +100,7 @@ Version in 0.7.1
 # TODO: simplify javascript using ,ore than 1 class in the class attribute?
 
 import datetime
-import io
+from io import StringIO
 import sys
 import unittest
 from xml.sax import saxutils
@@ -108,16 +108,15 @@ from xml.sax import saxutils
 import os
 import re
 import time
-import cof.co_time as CoTimeM
-import cof.file as CoFileM
+from utils.env_util import get_app_loc
 
 # by linsixiao
 import json
 import types
 import pprint
-from cof.http_util import Http
+# from common.common_method.util.http import Http
 
-app_loc = CoFileM.get_app_loc()
+app_loc = get_app_loc()
 
 
 # ------------------------------------------------------------------------
@@ -486,7 +485,7 @@ class _TestResult(TestResult):
     def startTest(self, test):
         TestResult.startTest(self, test)
         # just one buffer for both stdout and stderr
-        self.outputBuffer = io.StringIO()
+        self.outputBuffer = StringIO()
         stdout_redirector.fp = self.outputBuffer
         stderr_redirector.fp = self.outputBuffer
         self.stdout0 = sys.stdout
@@ -596,7 +595,8 @@ class HTMLTestRunner(Template_mixin):
         for n,t,o,e in result_list:
             # cls = t.__class__
             cls = t.context  # by linsixiao
-            if cls not in rmap:
+            # if not rmap.has_key(cls):
+            if not(cls in rmap):
                 rmap[cls] = []
                 classes.append(cls)
             rmap[cls].append((n,t,o,e))
@@ -620,7 +620,7 @@ class HTMLTestRunner(Template_mixin):
             status = 'none'
         return [
             (u'该次测试执行于', startTime),
-            (u'接口运行时间', duration),
+            (u'运行时间', duration),
             (u'状态', status),
         ]
 
@@ -676,15 +676,22 @@ class HTMLTestRunner(Template_mixin):
             # print "type:", str(type(cls))
             # if (type(cls) is types.ClassType):
             #     desc = str(cls)
-            if (type(cls) is types.ModuleType):
+            # elif (type(cls) is types.ModuleType):
+            #     desc = cls.__name__
+            # elif (type(cls) is types.TypeType):
+            if isinstance(cls, type):
+                desc = str(cls)
+            elif type(cls) is types.ModuleType:
                 desc = cls.__name__
-            else:
+            elif type(cls) is types.FrameType:
                 if cls.__module__ == "__main__":
                     name = cls.__name__
                 else:
                     name = "%s.%s" % (cls.__module__, cls.__name__)
                     doc = cls.__doc__ and cls.__doc__.split("\n")[0] or ""
                     desc = doc and '%s: %s' % (name, doc) or name
+            else:
+                print("error type")
             # print "dec:", desc
 
             row = self.REPORT_CLASS_TMPL % dict(
@@ -735,7 +742,7 @@ class HTMLTestRunner(Template_mixin):
         # spend_time = t.spend_time       # add by linsixiao
         spend_time = 1
 
-        self.send_case_info(path, name, spend_time)
+        # self.send_case_info(path, name, spend_time)
 
         tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL or self.REPORT_TEST_NO_OUTPUT_TMPL
 
@@ -794,7 +801,7 @@ class HTMLTestRunner(Template_mixin):
         testing_platform_url = '/api/v1.0/case-statis'
 
         # headers = dict()
-        http_obj = Http(host_platform_host)
+        # http_obj = Http(host_platform_host)
         # response = http_obj.post(testing_platform_url, case_info)       # post方法
 
         # pprint.pprint(response)
@@ -821,9 +828,10 @@ class TestProgram(unittest.TestProgram):
         # we have to instantiate HTMLTestRunner before we know self.verbosity.
         if self.testRunner is None:
             print("测试运行神器")
-            time_o = CoTimeM.CoTime(time.time())
-            # d = time_o.get_format_str("%Y-%m-%d-%H-%M")
-            d = time_o.get_format_str("%Y-%m-%d")
+            # time_o = CoTimeM.CoTime(time.time())
+            # # d = time_o.get_format_str("%Y-%m-%d-%H-%M")
+            # d = time_o.get_format_str("%Y-%m-%d")
+            d = time.strftime("%Y-%m-%d", time.localtime())
             fp = open(app_loc + os.sep + "results" + os.sep + d + "-main.html", "wb")
             self.verbosity = 2
             self.testRunner = HTMLTestRunner(verbosity=self.verbosity, stream=fp)

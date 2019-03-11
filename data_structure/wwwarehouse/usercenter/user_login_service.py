@@ -1,7 +1,8 @@
-from hamcrest import *
 import json
-import codecs
-from data_structure.base import BaseResData
+
+from hamcrest import *
+
+from data_structure.chenfan.base import BaseResData
 
 __author__ = "zzh"
 

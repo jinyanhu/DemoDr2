@@ -1,10 +1,10 @@
-from cof.conf import MyCfg     # 引用cof中的配置方法
+from utils.conf import MyCfg     # 引用cof中的配置方法
 
 
 class BaseHessian(object):
     def __init__(self):
         # 读取的配置文件的名称
-        my_cfg = MyCfg('wwwarehouse.ini')
+        my_cfg = MyCfg('chenfan.ini')
         # 配置段的名称
         my_cfg.set_section('wwwarehouse_api')
         # 根据key读value

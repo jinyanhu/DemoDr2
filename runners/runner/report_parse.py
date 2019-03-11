@@ -3,17 +3,23 @@
 """
 解析测试报告内容，组成推送信息
 using method:
-    input command in cmd linke "python runners.py case_2 case_1"
+    input command in cmd linke "python runner.py case_2 case_1"
 """
 import os
 import sys
+import time
 import socket
-import cof.co_time as cofTime
+
+__author__ = "zzh"
+__package__ = "IscsUIAutomation"
+# reload(sys)
+# sys.setdefaultencoding('utf8')
+sys.path.insert(0, '..')
 
 
 # 获取当前时间
-date = cofTime.get_date_ymd()       # 日期【20150213】
-timestamp = str(cofTime.get_ts())   # 时间戳【1423813170】
+date = time.strftime("%Y%m%d", time.localtime())       # 日期【20150213】
+timestamp = str(int(time.time()))   # 时间戳【1423813170】
 
 # 当前路径
 path = os.path.abspath(__file__)
@@ -79,14 +85,13 @@ def get_data(all_the_text):
     keyword：该项内容的关键字
     """
     # runtime
-    all_the_text = all_the_text.decode("utf-8")
     start = all_the_text.find("<strong>该次测试执行于:</strong>")
     end = all_the_text.find("</p>", start+25)
     runtime = str(all_the_text[start+25:end])
     # timeSpend
-    start = all_the_text.find("<strong>接口运行时间:</strong>")
-    end = all_the_text.find("</p>", start+24)
-    time_spend = str(all_the_text[start+24:end])
+    start = all_the_text.find("<strong>运行时间:</strong>")
+    end = all_the_text.find("</p>", start+22)
+    time_spend = str(all_the_text[start+22:end])
 
     hour_end = time_spend.find(":")
     hour = int(time_spend[0:hour_end])
@@ -132,7 +137,7 @@ def get_result(report_dir, report_title, report_file_name):
     """
     # 打开文件
     file_path = report_dir + '/' + report_file_name
-    file_object = open(file_path, "rb")
+    file_object = open(file_path, "r", encoding='utf-8')
     all_the_text = ""
     try:
         all_the_text = file_object.read()
@@ -143,17 +148,20 @@ def get_result(report_dir, report_title, report_file_name):
 
     # 获取本地ip
     csock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    csock.connect(('61.135.168.125', 80))
+    csock.connect(('10.228.81.198', 80))
     (local_ip, port) = csock.getsockname()
     csock.close()
     # local_ip = socket.gethostbyname(socket.gethostname())
-    port = "8082"      # 报告地址的端口，若使用默认端口（80）可以为空
+    port = "8222"      # 报告地址的端口，若使用默认端口（80）可以为空
 
     # 获取报告的相对目录，作为url目录
-    index = len(path) + 3
-    relative_directory = (report_dir[index:]).replace("\\", "/")
+    # index = len(path) + 28
+    # relative_directory = (report_dir[index:]).replace("\\", "/")
+    relative_directory = report_dir.split("../../")[1]
+    relative_directory = relative_directory.split("/")[1]
+
     if port != "":
-        report_url = "http://" + local_ip + ":" + port + relative_directory + "/" + date + timestamp + '.html'
+        report_url = "http://" + local_ip + ":" + port + "/" + relative_directory + "/" + date + timestamp + '.html'
     else:
         report_url = "http://" + local_ip + relative_directory + "/" + date + timestamp + '.html'
     result = "[" + data[0] + "]" + report_title +"测试结果： " \
@@ -164,14 +172,13 @@ def get_result(report_dir, report_title, report_file_name):
              + ",  通过率： " + str(data[6]) \
              + "%, 运行时间： " + str(data[1]) + "s"
     vag_time = data[7]
-    threshold = 5
+    threshold = 100
     if vag_time > threshold:
         result += ".\n平均用例运行时间为" + str(vag_time) +"s，超过" + str(threshold) + "s，请及时关注"
-
-    if str(data[5]) == "0" and str(data[4]) == "0":
-        result = "[" + data[0] + "]" + report_title + "接口自动化构建结果： 全部通过（共" + str(data[2]) + "个）"
-
     result += ".\n具体测试结果请查看： " + report_url
+
+    # if str(data[5]) == "0" and str(data[4]) == "0":
+    #     result = "[" + data[0] + "]" + report_title + "自动化构建结果： 全部通过（共" + str(data[2]) + "个）"
 
     return result
 

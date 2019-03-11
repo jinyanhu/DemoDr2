@@ -1,14 +1,13 @@
 {
     "case_1": {
-        "title": "wwwarehouse",
-        "report_file": "wwwarehouse",
+        "title": "chenfan",
+        "report_file": "chenfan",
         "cases": {
-            "wwwarehouse": [
-                "usercenter.user_login_service"
+            "chenfan": [
+                "login.test_login"
             ]
         },
-        "receivers": ["zhihe.zhang@wwwarehouse.com", "chengling.lei@wwwarehouse.com", "xiaodong.wang@wwwarehouse.com",
-        "wangchao.xu@wwwarehouse.com", "yongyong.zhang@wwwarehouse.com", "snowy.yuan@wwwarehouse.com", "xinshun.lv@wwwarehouse.com"],
-        "group":[]
+        "receivers": [],
+        "group":["83fd5534445da1f018363227c21d6fef2cab0e3dab5b28d4d600f92873d4b523"]
     }
 }

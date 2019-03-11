@@ -1,6 +1,7 @@
 import os
 import zipfile
-import cof.co_time as CoTimeM
+
+import utils.co_time as CoTimeM
 
 APP_LOC = ''
 __author__ = 'Administrator'

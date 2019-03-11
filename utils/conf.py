@@ -1,7 +1,9 @@
-from .co_time import get_log_time
-import cof.file as cofFile
 import configparser
 import os
+
+import utils.file as cofFile
+from utils.co_time import get_log_time
+
 __author__ = 'Administrator'
 # 全局变量
 gblCfp = configparser.ConfigParser()
