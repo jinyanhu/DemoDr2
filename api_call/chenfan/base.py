@@ -28,6 +28,8 @@ class BaseHttp(object):
         self.url = "http://" + self.host + ":" + self.port
 
 
+
+
 if __name__ == "__main__":
     base_http = BaseHttp()
 

@@ -21,11 +21,12 @@ from data_structure.chenfan.base import BaseData
 
 
 # ------------------------------- 请求参数 -------------------------------- #
-class DataLogin(BaseData):
+class DataVendorList(BaseData):
     """
-    登录参数构建
+    供应商参数构建
     """
-    def __init__(self, userName=None, password=None, dataType=None, code=None):
+    def __init__(self, category=None, coreproduct=None, factoryGrade=None, factorylocation=None, pageNum=None,
+                 pageSize=None, state=None, venAbbName=None, vendorCode=None, vensource=None, ventype=None):
         """
         初始化，设置各项数据
         设置时，使用显示参数传递；若为非必填参数，可以不传
@@ -41,9 +42,9 @@ class DataLogin(BaseData):
 
 
 # ------------- 响应值：BaseResData -------------- #
-class DataResLogin(object):
+class DataResVendorList(object):
     """
-    s3账户数据
+    返回值验证
     """
     def __init__(self, data, data_req=None):
         """
@@ -55,11 +56,12 @@ class DataResLogin(object):
         assert_that(data, has_key('code'))
         assert_that(data, has_key('message'))
         assert_that(data, has_key('obj'))
-        assert_that(data["obj"], has_key('uid'))
-        assert_that(data["obj"], has_key('token'))
-        assert_that(data["obj"], has_key('realName'))
-        assert_that(data["obj"], has_key('userId'))
+        assert_that(data["obj"], has_key('list'))
+        assert_that(data["obj"]["list"][0], has_key('vendorId'))
+        assert_that(data["obj"]["list"][0], has_key('vendorCode'))
+        assert_that(data["obj"]["list"][0], has_key('vendorName'))
+        assert_that(data["obj"]["list"][0], has_key('venAbbName'))
+
 
         # 2.根据传入的参数，进行数据正确性断言
-        assert_that(data["obj"]["qyType"], data_req["dataType"])
 

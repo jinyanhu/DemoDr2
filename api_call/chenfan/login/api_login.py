@@ -6,6 +6,7 @@ __author__ = 'Administrator'
 import json
 from utils.http_util import Http
 from api_call.chenfan.base import BaseHttp
+from utils.conf import MyCfg
 
 
 class ApiLogin(BaseHttp):
@@ -16,22 +17,25 @@ class ApiLogin(BaseHttp):
         """
         BaseHttp.__init__(self)                 # 父类初始化
         self.http = Http(self.header)  # http对象
+        self.conf = MyCfg("chenfan.ini")
+        self.conf.set_section("user_info")
 
     # ####################### 以下的每个方法，对应封装一个接口的调用过程 ################### #
     def post(self, body_data):
         """
         登录接口
         """
-        # 用字典字段赋值的方式，对header某个需要变更的字段赋值
-        # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
-
         # 将一个dict数据参数传入，直接设置为body数据，转换为json
         body_data = body_data.get()
         body_data["codeToken"] = self.get_code_token()
 
+        # 用字典字段赋值的方式，对header某个需要变更的字段赋值
+        # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
+        self.header["dataType"] = body_data["dataType"]
+
         # 调用对应http方法，加入body参数，发送请求
         url = self.url + "/user_login"
-        response = self.http.post(url, body=body_data)       # post方法
+        response = self.http.post(url, body=body_data, headers=self.header)       # post方法
 
         # 返回响应数据
         return response
@@ -55,6 +59,44 @@ class ApiLogin(BaseHttp):
 
         # 返回响应数据
         return code_token
+
+    def admin_login(self):
+        """
+        企业管理员账号zzh登录，返回token和企业类型字典
+        :return:
+        """
+        self.header["dataType"] = "qy"
+
+        login_dict = dict()
+        login_dict["data_type"] = "qy"
+
+        # 将一个dict数据参数传入，直接设置为body数据，转换为json
+        body_data = dict()
+        body_data["code"] = self.conf.get("admin_code")
+        body_data["dataType"] = self.conf.get("admin_data_type")
+        body_data["password"] = self.conf.get("admin_password")
+        body_data["userName"] = self.conf.get("admin_user_name")
+        body_data["codeToken"] = self.get_code_token()
+
+        # 调用对应http方法，加入body参数，发送请求
+        url = self.url + "/user_login"
+        response = self.http.post(url, body=body_data, headers=self.header)  # post方法
+
+        data = response.text
+        data_json = json.loads(data)
+        login_dict["token"] = data_json["obj"]["token"]
+        login_dict["user_id"] = data_json["obj"]["userId"]
+
+        return login_dict
+
+    def set_admin_login_header(self, headers):
+        """
+        设置企业管理员登录header
+        :return:
+        """
+        login_dict = self.admin_login()
+        headers["Authorization"] = login_dict["token"]
+        headers["dataType"] = login_dict["data_type"]
 
 
 if __name__ == "__main__":
