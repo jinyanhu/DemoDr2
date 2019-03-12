@@ -680,7 +680,10 @@ class HTMLTestRunner(Template_mixin):
             #     desc = cls.__name__
             # elif (type(cls) is types.TypeType):
             if isinstance(cls, type):
-                desc = str(cls)
+                # desc = str(cls)
+                desc = cls.__doc__
+                desc = desc.replace("'", "")
+                desc = desc.replace(" ", "")
             elif type(cls) is types.ModuleType:
                 desc = cls.__name__
             elif type(cls) is types.FrameType:
