@@ -4,7 +4,8 @@
         "report_file": "chenfan",
         "cases": {
             "chenfan": [
-                "login.test_login"
+                "login.test_login",
+                "base_service.test_vendor"
             ]
         },
         "receivers": [],
