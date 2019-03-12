@@ -12,6 +12,9 @@ sys.path.insert(0, '..')
 
 
 class TestLogin(unittest.TestCase):
+    """
+    登录接口
+    """
     def setUp(self):
         """
         测试类的构造方法

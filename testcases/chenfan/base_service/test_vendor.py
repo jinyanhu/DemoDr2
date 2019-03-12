@@ -12,6 +12,9 @@ sys.path.insert(0, '..')
 
 
 class TestVendor(unittest.TestCase):
+    """
+    供应商接口
+    """
     def setUp(self):
         """
         测试类的构造方法
