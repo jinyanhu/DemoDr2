@@ -168,7 +168,7 @@ def get_result(report_dir, report_title, report_file_name, date, timestamp):
         report_url = "http://" + local_ip + ":" + port + "/" + relative_directory + "/" + date + timestamp + '.html'
     else:
         report_url = "http://" + local_ip + relative_directory + "/" + date + timestamp + '.html'
-    result = "[" + data[0] + "]" + report_title +"测试结果： " \
+    result = "[" + data[0] + "]" + report_title +"接口测试结果： " \
              + "\n所有测试： " + str(data[2]) + "个" \
              + ",  通过： " + str(data[3]) + "个" \
              + ",  错误： " + str(data[5]) + "个" \
