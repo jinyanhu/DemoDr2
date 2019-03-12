@@ -97,7 +97,7 @@ if __name__ == "__main__":
 
         report_dir = get_report_path(report_file_dir)
         run_test_cases(test_sets, report_dir, title)
-        res = report_parse.get_result(report_dir, title, report_file_name)
+        res = report_parse.get_result(report_dir, title, report_file_name, date, timestamp)
 
         ding_send_msg = DingMsgSend(group[0])
         ding_send_msg.send_msg(res)

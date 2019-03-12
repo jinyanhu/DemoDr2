@@ -17,9 +17,9 @@ __package__ = "IscsUIAutomation"
 sys.path.insert(0, '..')
 
 
-# 获取当前时间
-date = time.strftime("%Y%m%d", time.localtime())       # 日期【20150213】
-timestamp = str(int(time.time()))   # 时间戳【1423813170】
+# # 获取当前时间
+# date = time.strftime("%Y%m%d", time.localtime())       # 日期【20150213】
+# timestamp = str(int(time.time()))   # 时间戳【1423813170】
 
 # 当前路径
 path = os.path.abspath(__file__)
@@ -130,7 +130,7 @@ def get_data(all_the_text):
     return [runtime, time_spend, total_num, pass_num, failed_num, error_num, percent, avg_time]
 
 
-def get_result(report_dir, report_title, report_file_name):
+def get_result(report_dir, report_title, report_file_name, date, timestamp):
     """
     获取测试报告结果内容，组成推送信息
     report_dir：报告所在的文件夹路径
