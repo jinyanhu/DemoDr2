@@ -160,6 +160,10 @@ def get_result(report_dir, report_title, report_file_name):
     relative_directory = report_dir.split("../../")[1]
     relative_directory = relative_directory.split("/")[1]
 
+    # 写死报告地址
+    local_ip = "10.228.81.191"
+    port = "8080"
+
     if port != "":
         report_url = "http://" + local_ip + ":" + port + "/" + relative_directory + "/" + date + timestamp + '.html'
     else:
