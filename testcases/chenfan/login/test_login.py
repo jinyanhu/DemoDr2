@@ -53,9 +53,35 @@ class TestLogin(unittest.TestCase):
         code = 200
         # 将返回解析后转换成dict的data数据
         # 若返回值不符合期望的状态码，message指明错误类型
-        data_dec = self.restful.parse_response(response, code, message)
+        data_dec = self.restful.parse_response_text(response, code, message)
 
         # 4.设置数据并在内部验证完整性
         DataResLogin(data_dec, body_data.get())
 
         print("test_login_ok pass")
+
+    def test_login_user_name_error(self):
+        """
+        用户名错误
+        """
+        # 1.准备参数，有些非必选的参数可以不填
+        code = "zhihe666"
+        dataType = "qy"
+        password = "Chenfan123"
+        userName = "zhangzhihe11"
+        body_data = DataLogin(userName=userName, password=password, dataType=dataType, code=code)
+
+        # 2.调用接口
+        response = self.api_login.post(body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "用户名错误校验失败"
+        code = 401
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response_text(response, code, message)
+
+        # 4.设置数据并在内部验证完整性
+        # DataResLogin(data_dec, body_data.get())
+
+        print("test_login_user_name_error pass")

@@ -48,7 +48,7 @@ class TestVendor(unittest.TestCase):
         code = 200
         # 将返回解析后转换成dict的data数据
         # 若返回值不符合期望的状态码，message指明错误类型
-        data_dec = self.restful.parse_response(response, code, message)
+        data_dec = self.restful.parse_response_text(response, code, message)
 
         # 4.设置数据并在内部验证完整性
         DataResVendorList(data_dec)
