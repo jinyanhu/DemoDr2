@@ -82,6 +82,7 @@ class Restful(object):
         """
 
         data = response.text
+        print(data)
 
         if len(data) == 0:      # 判断data有没有内容
             error = message + "，\n状态码：" + str(response.status_code)
