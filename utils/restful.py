@@ -82,6 +82,7 @@ class Restful(object):
         """
 
         data = response.text
+        print("接口返回值如下：")
         print(data)
 
         if len(data) == 0:      # 判断data有没有内容
