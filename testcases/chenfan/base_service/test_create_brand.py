@@ -35,8 +35,8 @@ class TeatCreateBrand(unittest.TestCase):
         :return:
         """
         # 准备参数
-        brandCode = "00011"
-        brandName = "接口自动化品牌"
+        brandCode = "00012"
+        brandName = "接口自动化品牌1"
         brandType = "1"
         createBy = "325"
         createName = "张晓方"
@@ -49,7 +49,7 @@ class TeatCreateBrand(unittest.TestCase):
         lowestReOrderPeriodScore = 33
         lowestVendorLevel = "A"
         magnification = "1.1"
-        prefixEn = "JK"
+        prefixEn = "JKZ"
         receiveAddress = "地址"
         receiveName = "收货人"
         receiveTel = "11122334455"
