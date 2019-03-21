@@ -61,5 +61,5 @@ class DataResLogin(object):
         assert_that(data["obj"], has_key('userId'))
 
         # 2.根据传入的参数，进行数据正确性断言
-        assert_that(data["obj"]["qyType"], data_req["dataType"])
+        assert_that(data["obj"]["qyType"], equal_to(data_req["dataType"]))
 
