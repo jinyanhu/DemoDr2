@@ -82,10 +82,12 @@ class ApiLogin(BaseHttp):
         url = self.url + "/user_login"
         response = self.http.post(url, body=body_data, headers=self.header)  # post方法
 
+        cookie = response.headers["set-cookie"]
         data = response.text
         data_json = json.loads(data)
         login_dict["token"] = data_json["obj"]["token"]
         login_dict["user_id"] = data_json["obj"]["userId"]
+        login_dict["Cookie"] = cookie + ";token=" + data_json["obj"]["token"]
 
         return login_dict
 
@@ -97,6 +99,7 @@ class ApiLogin(BaseHttp):
         login_dict = self.admin_login()
         headers["Authorization"] = login_dict["token"]
         headers["dataType"] = login_dict["data_type"]
+        headers["Cookie"] = login_dict["Cookie"]
 
 
 if __name__ == "__main__":

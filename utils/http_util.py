@@ -200,13 +200,17 @@ class Http(object):
 
 if __name__ == '__main__':
     headers = {
-        "Content-Type": "application/json"
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "8632E046C3E751A9C3A35849AD2A57E5ED76125A22752619B7068ECADE6A8A0B6AE0F1295B6235C550067AB29E630F25",
+        "Cookie": "SESSION=YmFkZTBhNTQtY2Q3Yy00ZDMzLWI2MWQtZmRmYzhkOTZhNzRj; token=8632E046C3E751A9C3A35849AD2A57E5ED76125A22752619B7068ECADE6A8A0B6AE0F1295B6235C550067AB29E630F25",
+        "dataType": "qy",
+        "user_agent": "pc",
+        "user_ip": "101.69.247.106"
     }
-    body = {
-        "username": "zhangzhihe",
-        "password": "12121"
-    }
+    #body = {'brandCode': '00011', 'receiveName': '收货人', 'lowestReOrderPeriodScore': 33, 'lowestPostSaleDefectiveScore': 33, 'createName': '张晓方', 'lowestVendorLevel': 'A', 'state': 1, 'lowestPreSaleDefectiveScore': 22, 'prefixEn': 'JK', 'createBy': '325', 'receiveTel': '11122334455', 'lowestPerformanceScore': 22, 'brandType': '1', 'brandName': '接口自动化品牌', 'receiveAddress': '地址', 'magnification': '1.1', 'customerName': '杭州宸帆电子商务有限责任公司', 'lowestOnTimeReachScore': 11, 'customerId': 19}
+    body = {'lowestVendorLevel': 'A', 'lowestReOrderPeriodScore': 33, 'lowestPreSaleDefectiveScore': 22, 'lowestPostSaleDefectiveScore': 33, 'lowestPerformanceScore': 22, 'lowestOnTimeReachScore': 11, 'state': 1, 'receiveTel': '11122334455', 'receiveName': '收货人', 'receiveAddress': '地址', 'prefixEn': 'JKZA', 'magnification': '1.1', 'customerName': '杭州宸帆电子商务有限责任公司', 'customerId': 19, 'brandType': '1', 'brandName': '接口自动化品牌2', 'brandCode': '00013'}
     print(type(body))
     http = Http()
-    res = http.post("http://jira.iscs.com.cn/rest/auth/1/session", headers, body)
+    res = http.post(url="http://10.228.88.254:8080/brand/add", headers=headers, body=body)
     pass
