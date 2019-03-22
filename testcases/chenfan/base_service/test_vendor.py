@@ -44,7 +44,8 @@ class TestVendor(unittest.TestCase):
         response = self.api_vendor.get_list()
 
         # 3.获取响应数据，判断状态码，并获取“data”
-        message = "获取供应商列表失败"
+        message = "获取供" \
+                  "应商列表失败"
         code = 200
         # 将返回解析后转换成dict的data数据
         # 若返回值不符合期望的状态码，message指明错误类型
