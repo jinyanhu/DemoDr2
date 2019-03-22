@@ -112,19 +112,7 @@ class ApiBrand(BaseHttp):
         response = self.http.get(url=url, params=body_data)
         return response
 
-
-class ApiCreateBrand(BaseHttp):
-    """
-    品牌创建接口
-    """
-    def __init__(self):
-
-        BaseHttp.__init__(self)
-        self.api_login = ApiLogin()
-        self.api_login.set_admin_login_header(self.header)  # 加登录header
-        self.http = Http(self.header)  # http对象
-
-    def create_brand(self, body_data):
+    def create_brand(self, body_data=None):
         """
         正常创建品牌
         :param body_data: 字典，包含创建品牌的所有字段

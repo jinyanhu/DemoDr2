@@ -67,8 +67,9 @@ class DataCreateBrand(BaseData):
     """
     def __init__(self, brandCode=None, brandName=None, brandType=None, createBy=None, createName=None, customerId=None,
                  customerName=None,magnification=None, prefixEn=None, receiveAddress=None, receiveName=None,
-                 receiveTel=None, state=None, lowestOnTimeReachScore=None, lowestPerformanceScore=None, lowestPostSaleDefectiveScore=None,
-        lowestPreSaleDefectiveScore=None, lowestReOrderPeriodScore=None, lowestVendorLevel=None):
+                 receiveTel=None, state=None, lowestOnTimeReachScore=None, lowestPerformanceScore=None,
+                 lowestPostSaleDefectiveScore=None,lowestPreSaleDefectiveScore=None, lowestReOrderPeriodScore=None,
+                 lowestVendorLevel=None):
         """
         接口数据初始化
         :param brandCode: 品牌编码
