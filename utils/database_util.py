@@ -5,13 +5,13 @@
 import time
 import pymysql
 import pymssql
-from automationTestPlatform.settings import DATABASES
 
 # 数据库连接参数
-connect_obj_local = {'host': "10.228.81.217",
-                     'user': "sa",
-                     'passwd': "Chenfan@123!@#",
-                     'database': "UFDATA_015_2016",
+connect_obj_local = {'host': "10.228.81.197",
+                     'port': 3306,
+                     'user': "root",
+                     'passwd': "sql666",
+                     'database': "scm11",
                      'charset': 'utf8'}
 
 
@@ -169,7 +169,7 @@ if __name__ == '__main__':
     示例
     """
     # 连接数据库，创建这个类的实例
-    db = Database("pymssql")
+    db = Database("pymysql")
 
     # 操作数据库
     sql = "select * from vendor"

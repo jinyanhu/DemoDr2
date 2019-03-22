@@ -62,6 +62,53 @@ class DataResVendorList(object):
         assert_that(data["obj"]["list"][0], has_key('vendorName'))
         assert_that(data["obj"]["list"][0], has_key('venAbbName'))
 
+        # 2.根据传入的参数，进行数据正确性断言
+
+
+class DataVendorAdd(BaseData):
+    """
+    供应商参数构建
+    """
+    def __init__(self, accname=None, annualOutput=None, category=None, companyRegistrationTime=None, cooperativeAttribute=None,
+                 cooperativePositioningcol=None, cooperativeStatus=None, coreproduct=None, cvenAccount=None, cvenAddress=None, cvenAddress2=None,
+                 cvenBank=None, cvenHand=None, cvenHand2=None, cvenPerson=None,cvenPerson2=None,cvenPhone=None,cvenPhone2=None,factoryAddress=None,factoryGrade=None,
+                 factorylocation=None,fregistFund=None,generalTaxpayer=None,inspectionResult=None,legalDepartmentsOpinion=None,legalRepresentative=None,mainServiceCustomerText=None,mainServiceCustomerType=None,monthlyDevelopment=None,
+                 monthlyProduction=None, numberFactories=None,productCode=None,qualificationAuditResult=None,registeredCapital=None,startCooperationTime=None,vcCode=None,vcId=None,vcIdS=None,venAbbName=None,
+                 vendorCode=None,vendorFiles=None,vendorName=None,venmoq=None,vensource=None,ventype=None):
+        """
+        初始化，设置各项数据
+        设置时，使用显示参数传递；若为非必填参数，可以不传
+        必填项参数
+        cvenAddress：地址
+        cvenHand：手机
+        cvenPerson：联系人
+        vcCode：供应商分类编码
+        vcId：供应商分类ID
+        venAbbName：供应商简称
+        vendorCode：供应商编码
+        vendorName：供应商名称
+        """
+        BaseData.__init__(self)
+        self.params = unity.copy_dict(locals())
+
+    def get(self):
+        return self.params
+
+
+# ------------- 响应值：BaseResData -------------- #
+class DataResVendorAdd(object):
+    """
+    返回值验证
+    """
+    def __init__(self, data, data_req=None):
+        """
+        初始化，获取格式化后的账户数据
+        data 为账户信息，dict类型，若还是json类型，则先行转换为dict；
+        data_req 为创建账户时输入的信息，dict类型（可选）
+        """
+        # 1.断言数据的完整性
+        assert_that(data, has_key('code'))
+        assert_that(data, has_key('message'))
 
         # 2.根据传入的参数，进行数据正确性断言
 
