@@ -125,3 +125,17 @@ class ApiBrand(BaseHttp):
         # 请求品牌列表接口得到返回值
         response = self.http.post(url=url, body=body_data)
         return response
+
+    def edit_brand(self, body_data=None):
+        """
+        正常创建品牌
+        :param body_data: 字典，包含创建品牌的所有字段
+        :return:
+        """
+        if body_data:
+            body_data = body_data.get()
+        # 请求的地址
+        url = self.url + "/chenfan_base/brand/update"
+        # 请求品牌列表接口得到返回值
+        response = self.http.put(url=url, body=body_data)
+        return response
