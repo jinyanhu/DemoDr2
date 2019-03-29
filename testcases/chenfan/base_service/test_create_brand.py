@@ -30,7 +30,7 @@ class TeatCreateBrand(unittest.TestCase):
         """
         # 准备参数
         brandCode = "00012"
-        brandName = "接口自动化品牌1"
+        brandName = "接口自动化品牌2"
         brandType = "1"
         createBy = "325"
         createName = "张晓方"
@@ -67,12 +67,9 @@ class TeatCreateBrand(unittest.TestCase):
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
         print("test_create_brand pass")
-
-    def test_create_brand_code(self):
-        """
-        不输入品牌编码创建品牌
-        :return:
-        """
+    """
+    def test_create_brand_no_brandCode(self):
+        
         # 准备参数
         brandCode = ""
         brandName = "接口自动化品牌"
@@ -88,7 +85,7 @@ class TeatCreateBrand(unittest.TestCase):
         lowestReOrderPeriodScore = 22.00
         lowestVendorLevel = "A"
         magnification = "1.1"
-        prefixEn = "JL"
+        prefixEn = "JKL"
         receiveAddress = "地址"
         receiveName = "收货人"
         receiveTel = "11122334"
@@ -111,9 +108,9 @@ class TeatCreateBrand(unittest.TestCase):
         data_dec = self.restful.parse_response_text(response, code, message)
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
-        print("test_create_brand_code pass")
-
-    def test_create_brand_name(self):
+        print("test_create_brand_no_brandCode pass")
+    """
+    def test_create_brand_no_brandName(self):
         """
         不输入品牌名称创建品牌
         :return:
@@ -156,16 +153,13 @@ class TeatCreateBrand(unittest.TestCase):
         data_dec = self.restful.parse_response_text(response, code, message)
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
-        print("test_create_brand_name pass")
-
-    def test_create_brand_id(self):
-        """
-        不输入客户ID创建品牌
-        :return:
-        """
+        print("test_create_brand_no_brandName pass")
+    """"
+    def test_create_brand_no_customerId(self):
+        
         # 准备参数
         brandCode = "0012"
-        brandName = "接口自动化品牌"
+        brandName = "接口自动化品牌2"
         brandType = "1"
         createBy = "325"
         createName = "张晓方"
@@ -178,7 +172,7 @@ class TeatCreateBrand(unittest.TestCase):
         lowestReOrderPeriodScore = 22.00
         lowestVendorLevel = "A"
         magnification = "1.1"
-        prefixEn = "JL"
+        prefixEn = "JSL"
         receiveAddress = "地址"
         receiveName = "收货人"
         receiveTel = "11122334"
@@ -201,13 +195,11 @@ class TeatCreateBrand(unittest.TestCase):
         data_dec = self.restful.parse_response_text(response, code, message)
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
-        print("test_create_brand_id pass")
-
-    def test_create_brand_customerName(self):
-        """
-        不输入客户名称创建品牌
-        :return:
-        """
+        print("test_create_brand_no_customerId pass")
+    """
+    """
+    def test_create_brand_no_customerName(self):
+        
         # 准备参数
         brandCode = "0012"
         brandName = "接口自动化品牌"
@@ -223,7 +215,7 @@ class TeatCreateBrand(unittest.TestCase):
         lowestReOrderPeriodScore = 22.00
         lowestVendorLevel = "A"
         magnification = "1.1"
-        prefixEn = "JL"
+        prefixEn = "JDL"
         receiveAddress = "地址"
         receiveName = "收货人"
         receiveTel = "11122334"
@@ -247,16 +239,106 @@ class TeatCreateBrand(unittest.TestCase):
         data_dec = self.restful.parse_response_text(response, code, message)
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
-        print("test_create_brand_customerName pass")
-
-    def test_create_brand_magnification(self):
+        print("test_create_brand_no_customerName pass")
+    """
+    def test_create_brand_no_magnification(self):
         """
         不输入倍率创建品牌
         :return:
         """
         # 准备参数
         brandCode = "0012"
-        brandName = "接口自动化品牌"
+        brandName = "接口自动化品牌3"
+        brandType = 1
+        createBy = 325
+        createName = "张晓方"
+        customerId = 19
+        customerName = "杭州宸帆电子商务有限责任公司"
+        lowestOnTimeReachScore = 11.00
+        lowestPerformanceScore = 22.00
+        lowestPostSaleDefectiveScore = 33.00
+        lowestPreSaleDefectiveScore = 22.00
+        lowestReOrderPeriodScore = 22.00
+        lowestVendorLevel = "A"
+        magnification = ""
+        prefixEn = "JLJ"
+        receiveAddress = "地址"
+        receiveName = "收货人"
+        receiveTel = "11122334"
+        state = 1
+
+        # 调用数据处理类，将参数合并到字典中
+        body_data = DataCreateBrand(brandCode=brandCode, brandName=brandName, brandType=brandType, createBy=createBy,
+                                    createName=createName, customerId=customerId, customerName=customerName,
+                                    magnification=magnification, prefixEn=prefixEn, receiveAddress=receiveAddress,
+                                    receiveName=receiveName, receiveTel=receiveTel, state=state,
+                                    lowestOnTimeReachScore=lowestOnTimeReachScore,
+                                    lowestPerformanceScore=lowestPerformanceScore,
+                                    lowestPostSaleDefectiveScore=lowestPostSaleDefectiveScore,
+                                    lowestPreSaleDefectiveScore=lowestPreSaleDefectiveScore,
+                                    lowestReOrderPeriodScore=lowestReOrderPeriodScore,
+                                    lowestVendorLevel=lowestVendorLevel)
+        # 调用品牌创建接口
+        response = self.api_brand.create_brand(body_data=body_data)
+        code = 400
+        message = "创建品牌失败"
+        data_dec = self.restful.parse_response_text(response, code, message)
+        # 断言接口返回的数据
+        DataResCreateBrand(data_dec)
+        print("test_create_brand_no_magnification pass")
+
+    def test_create_brand_no_lowestVendorLevel(self):
+        """
+        不输入供应商最低等级创建品牌
+        :return:
+        """
+        # 准备参数
+        brandCode = "0012"
+        brandName = "接口自动化品牌1"
+        brandType = "1"
+        createBy = "325"
+        createName = "张晓方"
+        customerId = 19
+        customerName = "杭州宸帆电子商务有限责任公司"
+        lowestOnTimeReachScore = 11.00
+        lowestPerformanceScore = 22.00
+        lowestPostSaleDefectiveScore = 33.00
+        lowestPreSaleDefectiveScore = 22.00
+        lowestReOrderPeriodScore = 22.00
+        lowestVendorLevel = ""
+        magnification = "1.1"
+        prefixEn = "HJK"
+        receiveAddress = "地址"
+        receiveName = "收货人"
+        receiveTel = "11122334"
+        state = 1
+
+        # 调用数据处理类，将参数合并到字典中
+        body_data = DataCreateBrand(brandCode=brandCode, brandName=brandName, brandType=brandType, createBy=createBy,
+                                    createName=createName, customerId=customerId, customerName=customerName,
+                                    magnification=magnification, prefixEn=prefixEn, receiveAddress=receiveAddress,
+                                    receiveName=receiveName, receiveTel=receiveTel, state=state,
+                                    lowestOnTimeReachScore=lowestOnTimeReachScore,
+                                    lowestPerformanceScore=lowestPerformanceScore,
+                                    lowestPostSaleDefectiveScore=lowestPostSaleDefectiveScore,
+                                    lowestPreSaleDefectiveScore=lowestPreSaleDefectiveScore,
+                                    lowestReOrderPeriodScore=lowestReOrderPeriodScore,
+                                    lowestVendorLevel=lowestVendorLevel)
+        # 调用品牌创建接口
+        response = self.api_brand.create_brand(body_data=body_data)
+        code = 400
+        message = "创建品牌失败"
+        data_dec = self.restful.parse_response_text(response, code, message)
+        # 断言接口返回的数据
+        DataResCreateBrand(data_dec)
+        print("test_create_brand_no_lowestVendorLevel pass")
+
+    """
+    def test_create_brand_no_receiveAddress(self):
+        
+        # 准备参数
+        brandCode = "00012"
+        brandName = "接口自动化品牌4"
         brandType = "1"
         createBy = "325"
         createName = "张晓方"
@@ -268,9 +350,9 @@ class TeatCreateBrand(unittest.TestCase):
         lowestPreSaleDefectiveScore = 22.00
         lowestReOrderPeriodScore = 22.00
         lowestVendorLevel = "A"
-        magnification = ""
-        prefixEn = "JL"
-        receiveAddress = "地址"
+        magnification = "1.1"
+        prefixEn = "JFL"
+        receiveAddress = ""
         receiveName = "收货人"
         receiveTel = "11122334"
         state = 1
@@ -293,4 +375,5 @@ class TeatCreateBrand(unittest.TestCase):
         data_dec = self.restful.parse_response_text(response, code, message)
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
-        print("test_create_brand_magnification pass")
+        print("test_create_brand_no_lowestVendorLevel pass")
+    """
