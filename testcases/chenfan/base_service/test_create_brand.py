@@ -1,7 +1,6 @@
 
 import sys
 import unittest  # 单元测试框架
-
 from api_call.chenfan.base_service.api_brand import ApiBrand
 from data_structure.chenfan.base_service.data_brand import DataResCreateBrand
 from data_structure.chenfan.base_service.data_brand import DataCreateBrand
@@ -43,7 +42,7 @@ class TeatCreateBrand(unittest.TestCase):
         lowestReOrderPeriodScore = 22.00
         lowestVendorLevel = "A"
         magnification = "1.1"
-        prefixEn = "JL"
+        prefixEn = "JHL"
         receiveAddress = "地址"
         receiveName = "收货人"
         receiveTel = "11122334"
@@ -66,7 +65,10 @@ class TeatCreateBrand(unittest.TestCase):
         data_dec = self.restful.parse_response_text(response, code, message)
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
+        sql = "DELETE FROM brand WHERE brand_code = '00012'"
+        self.api_brand.delete_brand(sql=sql)
         print("test_create_brand pass")
+
     """
     def test_create_brand_no_brandCode(self):
         
@@ -154,6 +156,7 @@ class TeatCreateBrand(unittest.TestCase):
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
         print("test_create_brand_no_brandName pass")
+
     """"
     def test_create_brand_no_customerId(self):
         
@@ -241,6 +244,7 @@ class TeatCreateBrand(unittest.TestCase):
         DataResCreateBrand(data_dec)
         print("test_create_brand_no_customerName pass")
     """
+
     def test_create_brand_no_magnification(self):
         """
         不输入倍率创建品牌

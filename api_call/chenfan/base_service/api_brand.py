@@ -1,5 +1,6 @@
 
 import json
+from utils.database_util import Database
 from utils.http_util import Http
 from api_call.chenfan.base import BaseHttp
 from api_call.chenfan.login.api_login import ApiLogin
@@ -12,6 +13,7 @@ class ApiBrand(BaseHttp):
     def __init__(self):
 
         BaseHttp.__init__(self)
+        self.database = Database("pymysql")
         self.api_login = ApiLogin()
         self.api_login.set_admin_login_header(self.header)  # 加登录header
         self.http = Http(self.header)  # http对象
@@ -28,6 +30,14 @@ class ApiBrand(BaseHttp):
         # 请求品牌列表接口得到返回值
         response = self.http.get(url=url, params=body_data)
         return response
+
+    def delete_brand(self, sql):
+        """
+
+        :param sql: sql语句
+        :return:
+        """
+        self.database.update(sql=sql)
 
     def get_code_brand_list(self, body_data=None):
         """
