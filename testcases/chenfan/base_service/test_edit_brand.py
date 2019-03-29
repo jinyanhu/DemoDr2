@@ -493,3 +493,98 @@ class TeatEdieBrand(unittest.TestCase):
         # 断言接口返回的数据
         DataResEditBrand(data_dec)
         print("test_edit_brand_no_prefixEn pass")
+
+    def test_edit_brand_same_brandName(self):
+        """
+        修改时品牌名称重复
+        :return:
+        """
+        # 准备参数
+        brandId = "32"
+        brandCode = "00019"
+        brandName = "接口自动化品牌"
+        brandType = "1"
+        customerId = 19
+        customerName = "杭州宸帆电子商务有限责任公司"
+        lowestOnTimeReachScore = 11.00
+        lowestPerformanceScore = 22.00
+        lowestPostSaleDefectiveScore = 33.00
+        lowestPreSaleDefectiveScore = 22.00
+        lowestReOrderPeriodScore = 22.00
+        lowestVendorLevel = "A"
+        magnification = "1.1"
+        prefixEn = "JL"
+        receiveAddress = "地址"
+        receiveName = "收货人"
+        receiveTel = "1254656"
+        state = 1
+        updateBy = "325"
+        updateName = "张晓方"
+        # 调用数据处理类，将参数合并到字典中
+        body_data = DataEditBrand(brandCode=brandCode, brandName=brandName, brandType=brandType,
+                                  customerId=customerId, customerName=customerName,
+                                  magnification=magnification, prefixEn=prefixEn, receiveAddress=receiveAddress,
+                                  receiveName=receiveName, receiveTel=receiveTel, state=state,
+                                  lowestOnTimeReachScore=lowestOnTimeReachScore,
+                                  lowestPerformanceScore=lowestPerformanceScore,
+                                  lowestPostSaleDefectiveScore=lowestPostSaleDefectiveScore,
+                                  lowestPreSaleDefectiveScore=lowestPreSaleDefectiveScore,
+                                  lowestReOrderPeriodScore=lowestReOrderPeriodScore,
+                                  lowestVendorLevel=lowestVendorLevel, updateBy=updateBy, updateName=updateName,
+                                  brandId=brandId)
+        # 调用品牌创建接口
+        response = self.api_brand.edit_brand(body_data=body_data)
+        code = 500
+        message = "修改品牌失败"
+        data_dec = self.restful.parse_response_text(response, code, message)
+        # 断言接口返回的数据
+        DataResEditBrand(data_dec)
+        print("test_edit_brand_same_brandName pass")
+
+    def test_edit_brand_same_prefixEn(self):
+        """
+        不输入前缀修改品牌
+        :return:
+        """
+        # 准备参数
+        brandId = "32"
+        brandCode = "00019"
+        brandName = "接口自动化品牌1"
+        brandType = "1"
+        customerId = 19
+        customerName = "杭州宸帆电子商务有限责任公司"
+        lowestOnTimeReachScore = 11.00
+        lowestPerformanceScore = 22.00
+        lowestPostSaleDefectiveScore = 33.00
+        lowestPreSaleDefectiveScore = 22.00
+        lowestReOrderPeriodScore = 22.00
+        lowestVendorLevel = "A"
+        magnification = "1.1"
+        prefixEn = "CH"
+        receiveAddress = "地址"
+        receiveName = "收货人"
+        receiveTel = "1254656"
+        state = 1
+        updateBy = "325"
+        updateName = "张晓方"
+        # 调用数据处理类，将参数合并到字典中
+        body_data = DataEditBrand(brandCode=brandCode, brandName=brandName, brandType=brandType,
+                                  customerId=customerId, customerName=customerName,
+                                  magnification=magnification, prefixEn=prefixEn, receiveAddress=receiveAddress,
+                                  receiveName=receiveName, receiveTel=receiveTel, state=state,
+                                  lowestOnTimeReachScore=lowestOnTimeReachScore,
+                                  lowestPerformanceScore=lowestPerformanceScore,
+                                  lowestPostSaleDefectiveScore=lowestPostSaleDefectiveScore,
+                                  lowestPreSaleDefectiveScore=lowestPreSaleDefectiveScore,
+                                  lowestReOrderPeriodScore=lowestReOrderPeriodScore,
+                                  lowestVendorLevel=lowestVendorLevel, updateBy=updateBy, updateName=updateName,
+                                  brandId=brandId)
+        # 调用品牌创建接口
+        response = self.api_brand.edit_brand(body_data=body_data)
+        code = 500
+        message = "修改品牌失败"
+        data_dec = self.restful.parse_response_text(response, code, message)
+        # 断言接口返回的数据
+        DataResEditBrand(data_dec)
+        print("test_edit_brand_same_prefixEn pass")
+

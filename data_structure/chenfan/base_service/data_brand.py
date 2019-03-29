@@ -51,7 +51,7 @@ class DataResBrandFailure(object):
     """
     def __init__(self, data):
         """
-        初始化，获取格式化后的账户数据
+        初始化，获取格式化后的数据
         :param data:
         """
         # 断言数据的正确性
@@ -97,7 +97,7 @@ class DataResCreateBrand(object):
 
     def __init__(self, data):
         """
-        初始化，获取格式化后的账户数据
+        初始化，获取格式化后的数据
         :param data:
         """
         # 断言数据的正确性
@@ -141,7 +141,7 @@ class DataResEditBrand(object):
 
     def __init__(self, data):
         """
-        初始化，获取格式化后的账户数据
+        初始化，获取格式化后的数据
         :param data:
         """
         # 断言数据的正确性
