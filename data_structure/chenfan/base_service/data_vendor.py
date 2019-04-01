@@ -23,7 +23,7 @@ from data_structure.chenfan.base import BaseData
 # ------------------------------- 请求参数 -------------------------------- #
 class DataVendorList(BaseData):
     """
-    供应商参数构建
+    供应商列表参数构建
     """
     def __init__(self, category=None, coreproduct=None, factoryGrade=None, factorylocation=None, pageNum=None,
                  pageSize=None, state=None, venAbbName=None, vendorCode=None, vensource=None, ventype=None):
@@ -67,7 +67,7 @@ class DataResVendorList(object):
 
 class DataVendorAdd(BaseData):
     """
-    供应商参数构建
+    供应商新增参数构建
     """
     def __init__(self, accname=None, annualOutput=None, category=None, companyRegistrationTime=None, cooperativeAttribute=None,
                  cooperativePositioningcol=None, cooperativeStatus=None, coreproduct=None, cvenAccount=None, cvenAddress=None, cvenAddress2=None,
@@ -97,6 +97,42 @@ class DataVendorAdd(BaseData):
 
 # ------------- 响应值：BaseResData -------------- #
 class DataResVendorAdd(object):
+    """
+    返回值验证
+    """
+    def __init__(self, data, data_req=None):
+        """
+        初始化，获取格式化后的账户数据
+        data 为账户信息，dict类型，若还是json类型，则先行转换为dict；
+        data_req 为创建账户时输入的信息，dict类型（可选）
+        """
+        # 1.断言数据的完整性
+        assert_that(data, has_key('code'))
+        assert_that(data, has_key('message'))
+
+        # 2.根据传入的参数，进行数据正确性断言
+
+
+class DataSwitchBanVendor(BaseData):
+    """
+    供应商启用禁用
+    """
+    def __init__(self, vendorId = None):
+        """
+        初始化，设置各项数据
+        设置时，使用显示参数传递；若为非必填参数，可以不传
+        必填项参数
+        vendorId  供应商ID
+        """
+        BaseData.__init__(self)
+        self.params = unity.copy_dict(locals())
+
+    def get(self):
+        return self.params
+
+
+# ------------- 响应值：BaseResData -------------- #
+class DataResSwitchBanVendor(object):
     """
     返回值验证
     """
