@@ -12,9 +12,7 @@ from api_call.chenfan.login.api_login import ApiLogin
 class ApiVendor(BaseHttp):
     def __init__(self):
         """
-        供应商创建请求接口
-        初始化方法
-        各个接口方法封装中需要的公共内容，可以统一写在这里
+        供应商创建接口
         """
         BaseHttp.__init__(self)                 # 父类初始化
         self.api_login = ApiLogin()
