@@ -2,6 +2,7 @@ __author__ = 'zzh'
 
 import sys
 import unittest  # 单元测试框架
+import random
 
 from api_call.chenfan.base_service.api_vendor import ApiVendor
 from data_structure.chenfan.base_service.data_vendor import DataVendorAdd
@@ -13,7 +14,7 @@ sys.path.insert(0, '..')
 
 class TestAddVendor(unittest.TestCase):
     """
-    供应商接口
+    供应商新增接口
     """
     def setUp(self):
         """
@@ -39,15 +40,22 @@ class TestAddVendor(unittest.TestCase):
         输入所有必填项，正常新增供应商
         """
         # 1.准备必填的参数，有些非必选的参数可以不填
+        """
+        获取随机的5位纯数字当做供应商编码
+        """
+        str = ""
+        for i in range(5):
+            ch = chr(random.randrange(ord('0'),ord('9') + 1))
+            str += ch
         cvenAddress = "测试"
         cvenHand = "17610225668"
         cvenPerson = "测试"
         vcCode = "01"
         vcId = "1"
         vcIdS = "1-01"
-        venAbbName = "测试01233"
-        vendorCode = "01233"
-        vendorName = "测试01233"
+        venAbbName = str
+        vendorCode = str
+        vendorName = str
         vensource = "招标渠道"
         factorylocation = "大店"
         vendorFiles = []
@@ -69,6 +77,9 @@ class TestAddVendor(unittest.TestCase):
 
         # 4.设置数据并在内部验证完整性
         DataResVendorAdd(data_dec)
+        """sql = "DELETE FROM vendor WHERE vendor_code = '01233'"
+        self.api_vendor.delete_vendor(sql=sql)
+        """
 
         print("test_add_vendor_ok pass")
 

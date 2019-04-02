@@ -14,7 +14,7 @@ sys.path.insert(0, '..')
 
 class TestVendor(unittest.TestCase):
     """
-    供应商接口
+    供应商列表接口
     """
     def setUp(self):
         """

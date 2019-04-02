@@ -13,7 +13,7 @@ sys.path.insert(0, '..')
 
 class TestVendorState(unittest.TestCase):
     """
-    供应商接口
+    供应商禁用启用接口
     """
     def setUp(self):
         """
