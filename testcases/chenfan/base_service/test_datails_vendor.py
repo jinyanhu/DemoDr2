@@ -35,7 +35,7 @@ class TestDetailsVendor(unittest.TestCase):
 
     def test_details_vendor_ok(self):
         """
-        输入供应商ID，获取供应商详情
+        输入供应商ID，获取供应商详情成功
         """
         # 1.准备必填的参数，有些非必选的参数可以不填
         vendorId = 1

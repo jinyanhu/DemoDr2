@@ -82,7 +82,6 @@ class TestAddVendor(unittest.TestCase):
         # sql_server = "delete from vendor where cVenCode='{}'".format(vendorCode)
         # self.api_vendor.delete_vendor(sql, sql_server)
 
-
         print("test_add_vendor_ok pass")
 
     def test_add_vendor_no_vendorCode_fail(self):
