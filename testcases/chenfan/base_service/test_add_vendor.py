@@ -43,19 +43,20 @@ class TestAddVendor(unittest.TestCase):
         """
         获取随机的5位纯数字当做供应商编码
         """
-        str = ""
-        for i in range(5):
-            ch = chr(random.randrange(ord('0'),ord('9') + 1))
-            str += ch
+        # str = ""
+        # for i in range(5):
+        #     ch = chr(random.randrange(ord('0'),ord('9') + 1))
+        #     str += ch
+        int_5 = str(random.randint(10000, 99999))
         cvenAddress = "测试"
         cvenHand = "17610225668"
         cvenPerson = "测试"
         vcCode = "01"
         vcId = "1"
         vcIdS = "1-01"
-        venAbbName = str
-        vendorCode = str
-        vendorName = str
+        venAbbName = int_5
+        vendorCode = int_5
+        vendorName = int_5
         vensource = "招标渠道"
         factorylocation = "大店"
         vendorFiles = []
@@ -76,10 +77,11 @@ class TestAddVendor(unittest.TestCase):
         data_dec = self.restful.parse_response_text(response, code, message)
 
         # 4.设置数据并在内部验证完整性
-        DataResVendorAdd(data_dec)
-        """sql = "DELETE FROM vendor WHERE vendor_code = '01233'"
-        self.api_vendor.delete_vendor(sql=sql)
-        """
+        # DataResVendorAdd(data_dec)
+        # sql = "DELETE FROM vendor WHERE vendor_code = '{}'".format(vendorCode)
+        # sql_server = "delete from vendor where cVenCode='{}'".format(vendorCode)
+        # self.api_vendor.delete_vendor(sql, sql_server)
+
 
         print("test_add_vendor_ok pass")
 

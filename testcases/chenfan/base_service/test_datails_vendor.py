@@ -38,7 +38,7 @@ class TestDetailsVendor(unittest.TestCase):
         输入供应商ID，获取供应商详情
         """
         # 1.准备必填的参数，有些非必选的参数可以不填
-        vendorId = "1"
+        vendorId = 1
         # 调用数据处理类，将参数合并到字典中
         body_data = DataVendorInfo(vendorId=vendorId)
 
@@ -51,11 +51,15 @@ class TestDetailsVendor(unittest.TestCase):
         # 若返回值不符合期望的状态码，message指明错误类型
         data_dec = self.restful.parse_response_text(response, code, message)
 
+        body_data = body_data.get()
+        body_data["vendorName"] = "RUMI"
+        body_data["vendorCode"] = "00005"
+        body_data["venAbbName"] = "RUMI"
         # 4.设置数据并在内部验证完整性
-        DataResVendorInfo(data_dec)
+        DataResVendorInfo(data_dec, body_data)
         print("test_details_vendor_ok pass")
 
-    def test_error_vendor_id__ok(self):
+    def test_null_vendor_id_ok(self):
         """
         不输入供应商ID，获取供应商详情失败
         """
@@ -75,4 +79,26 @@ class TestDetailsVendor(unittest.TestCase):
 
         # 4.设置数据并在内部验证完整性
         DataResVendorInfo(data_dec)
-        print("test_details_vendor_ok pass")
+        print("test_null_vendor_id_ok pass")
+
+    def test_error_vendor_id_ok(self):
+        """
+        供应商id不存在，获取供应商详情失败
+        """
+        # 1.准备必填的参数，有些非必选的参数可以不填
+        vendorId = 5444
+        # 调用数据处理类，将参数合并到字典中
+        body_data = DataVendorInfo(vendorId=vendorId)
+
+        # 2.调用接口
+        response = self.api_vendor.get_vendor_details(body_data)
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "ID不存在"
+        code = 500
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response(response, code, message)
+
+        # 4.设置数据并在内部验证完整性
+        # DataResVendorInfo(data_dec)
+        print("test_error_vendor_id_ok pass")

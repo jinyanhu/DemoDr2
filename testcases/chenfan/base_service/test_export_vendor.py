@@ -52,5 +52,11 @@ class TestExportVendor(unittest.TestCase):
         body_data = ExportVendorAdd(category=category, coreproduct=coreproduct, factoryGrade=factoryGrade, factorylocation=factorylocation, pageNum=pageNum, pageSize=pageSize,
                                        state=state, venAbbName=venAbbName, vendorCode=vendorCode, vensource=vensource, ventype=ventype)
         response = self.api_vendor.get_list_export(body_data)
-        print(response)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "success"
+        code = 200
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response(response, code, message, False)
 

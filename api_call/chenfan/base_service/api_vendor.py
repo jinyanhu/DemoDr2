@@ -16,7 +16,13 @@ class ApiVendor(BaseHttp):
         供应商创建接口
         """
         BaseHttp.__init__(self)                 # 父类初始化
+        self.server_connect_obj_local = {'host': "10.228.81.199",
+                     'user': "sa",
+                     'passwd': "Chenfan123",
+                     'database': "UFDATA_015_2016",
+                     'charset': 'utf8'}
         self.database = Database("pymysql")
+        self.server_database = Database("pymssql", self.server_connect_obj_local)
         self.api_login = ApiLogin()
         self.api_login.set_admin_login_header(self.header)  # 加登录header
         self.http = Http(self.header)  # http对象
@@ -113,12 +119,13 @@ class ApiVendor(BaseHttp):
         # 返回响应数据
         return response
 
-    def delete_vendor(self, sql):
+    def delete_vendor(self, sql, server_sql):
         """
         :param sql: sql语句
         :return:
         """
         self.database.update(sql=sql)
+        self.server_database.update(server_sql)
 
     def put_update_vendor(self, body_data=None):
         """
