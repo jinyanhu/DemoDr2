@@ -19,7 +19,7 @@ class Restful(object):
         """
         pass
 
-    def parse_response(self, response, code, message):
+    def parse_response(self, response, code, message, is_json=True):
         """
         解析请求接口返回的数据。
 
@@ -62,7 +62,8 @@ class Restful(object):
             else:
                 try:
                     # data_dec = json.loads(data, encoding='gb2312')
-                    data_dec = json.loads(data)
+                    if is_json:
+                        data_dec = json.loads(data)
                 except Exception as e:
                     error = message + "，\n状态码：" + str(response.status_code) + "，数据不是json格式的，返回数据为： " + data
                     assert_that(error, equal_to(""), str(e))
