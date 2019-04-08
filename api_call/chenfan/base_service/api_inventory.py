@@ -1,5 +1,4 @@
 
-
 from utils.database_util import Database
 from utils.http_util import Http
 from api_call.chenfan.base import BaseHttp
@@ -77,13 +76,20 @@ class ApiInventory(BaseHttp):
         response = self.http.post(url=url, body=body_data)
         return response
 
+    def delete_inventory(self, sql):
+        """
+        数据删除方法
+        :param sql: sql语句
+        :return:
+        """
+        self.database.update(sql=sql)
+
     def edit_inventory(self, body_data):
         """
         存货编码更新
         :return:
         """
-        if body_data:
-            body_data = body_data.get()
+
         # 请求的地址
         url = self.url + "/chenfan_base/inventory/update"
         # 请求品牌列表接口得到返回值
