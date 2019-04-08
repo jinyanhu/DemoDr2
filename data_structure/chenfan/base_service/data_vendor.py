@@ -210,14 +210,19 @@ class DataResVendorInfo(object):
         # 1.断言数据的完整性
         assert_that(data, has_key('code'))
         assert_that(data, has_key('message'))
-        # assert_that(data, has_key('obj'))
-        # assert_that(data["obj"], has_key('venAbbName'))
-        # assert_that(data["obj"], has_key('vendorName'))
-        # assert_that(data["obj"], has_key('vendorId'))
-        # assert_that(data["obj"], has_key('vendorCode'))
-        # assert_that(data["obj"]["venAbbName"], equal_to(data_req["venAbbName"]))
-        # assert_that(data["obj"]["vendorName"], equal_to(data_req["vendorName"]))
-        # assert_that(data["obj"]["vendorCode"], equal_to(data_req["vendorCode"]))
+        assert_that(data, has_key('obj'))
+        assert_that(data["obj"], has_key('venAbbName'))
+        assert_that(data["obj"], has_key('vendorName'))
+        assert_that(data["obj"], has_key('vendorId'))
+        assert_that(data["obj"], has_key('vendorCode'))
+        if "venAbbName" in data_req:
+            assert_that(data["obj"]["venAbbName"], equal_to(data_req["venAbbName"]))
+        if "vendorName" in data_req:
+            assert_that(data["obj"]["vendorName"], equal_to(data_req["vendorName"]))
+        if "vendorCode" in data_req:
+            assert_that(data["obj"]["vendorCode"], equal_to(data_req["vendorCode"]))
+        if "vendorId" in data_req:
+            assert_that(data["obj"]["vendorId"], equal_to(data_req["vendorId"]))
 
 
 class UpdateVendorDate(BaseData):

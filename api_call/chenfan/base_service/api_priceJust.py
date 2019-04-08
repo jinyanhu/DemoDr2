@@ -1,7 +1,7 @@
 __author__ = 'Administrator'
 
 """
-供应商
+存货调价单
 """
 import json
 from utils.http_util import Http
@@ -10,28 +10,33 @@ from api_call.chenfan.base import BaseHttp
 from api_call.chenfan.login.api_login import ApiLogin
 
 
-class ApiVendor(BaseHttp):
+class ApiPriceJust(BaseHttp):
     def __init__(self):
         """
-        供应商创建接口
+        存货调价单创建接口
         """
         BaseHttp.__init__(self)                 # 父类初始化
-        self.server_connect_obj_local = {'host': "10.228.81.199",
-                     'user': "sa",
-                     'passwd': "Chenfan123",
-                     'database': "UFDATA_015_2016",
-                     'charset': 'utf8'}
         self.database = Database("pymysql")
-        self.server_database = Database("pymssql", self.server_connect_obj_local)
         self.api_login = ApiLogin()
         self.api_login.set_admin_login_header(self.header)  # 加登录header
         self.http = Http(self.header)  # http对象
 
     # ####################### 以下的每个方法，对应封装一个接口的调用过程 ################### #
 
-    def post(self, body_data=None):
+    def post_add_price(self, body_data=None):
         """
         新增供应商
+        """
+        # 调用对应http方法，加入body参数，发送请求
+        url = self.url + "/chenfan_base/priceJust/add"
+        response = self.http.post(url=url, body=body_data, headers=self.header)       # post方法
+
+        # 返回响应数据
+        return response
+
+    def get_price_just_code(self, body_data=None):
+        """
+        获取存货调价单号
         """
         # 用字典字段赋值的方式，对header某个需要变更的字段赋值
         # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
@@ -41,11 +46,15 @@ class ApiVendor(BaseHttp):
             body_data = body_data.get()
 
         # 调用对应http方法，加入body参数，发送请求
-        url = self.url + "/chenfan_base/vendor/add"
-        response = self.http.post(url=url, body=body_data, headers=self.header)       # post方法
-
-        # 返回响应数据
-        return response
+        url = self.url + "/chenfan_base/numberGenerator/getNumber/QTJ"
+        response = self.http.get(url, params=body_data)  # get方法
+        # 返回响应数据,把返回的数据做json处理
+        json_str = response.json()
+        json_left = dict(json_str)
+        # 获取到json中obj(调价单号)的值
+        price_code = json_left['obj']
+        print(price_code)
+        return price_code
 
     def get_list(self, body_data=None):
         """
@@ -119,13 +128,12 @@ class ApiVendor(BaseHttp):
         # 返回响应数据
         return response
 
-    def delete_vendor(self, sql, server_sql):
+    def delete_vendor(self, sql):
         """
         :param sql: sql语句
         :return:
         """
         self.database.update(sql=sql)
-        self.server_database.update(server_sql)
 
     def put_update_vendor(self, body_data=None):
         """

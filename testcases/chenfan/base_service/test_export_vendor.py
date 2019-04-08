@@ -44,6 +44,35 @@ class TestExportVendor(unittest.TestCase):
         pageSize = ""
         state = ""
         venAbbName = ""
+        vendorCode = ""
+        vensource = ""
+        ventype = ""
+
+        # 2.调用接口
+        body_data = ExportVendorAdd(category=category, coreproduct=coreproduct, factoryGrade=factoryGrade, factorylocation=factorylocation, pageNum=pageNum, pageSize=pageSize,
+                                       state=state, venAbbName=venAbbName, vendorCode=vendorCode, vensource=vensource, ventype=ventype)
+        response = self.api_vendor.get_list_export(body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "success"
+        code = 200
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response(response, code, message, False)
+        print("test_export_vendor_ok pass")
+
+    def test_import_vendor_export_ok(self):
+        """
+        输入供应商编码，导出供应商数据
+        """
+        category = ""
+        coreproduct = ""
+        factoryGrade = ""
+        factorylocation = ""
+        pageNum = ""
+        pageSize = ""
+        state = ""
+        venAbbName = ""
         vendorCode = "00123"
         vensource = ""
         ventype = ""
@@ -52,5 +81,99 @@ class TestExportVendor(unittest.TestCase):
         body_data = ExportVendorAdd(category=category, coreproduct=coreproduct, factoryGrade=factoryGrade, factorylocation=factorylocation, pageNum=pageNum, pageSize=pageSize,
                                        state=state, venAbbName=venAbbName, vendorCode=vendorCode, vensource=vensource, ventype=ventype)
         response = self.api_vendor.get_list_export(body_data)
-        print(response)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "success"
+        code = 200
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response(response, code, message, False)
+        print("test_import_vendor_export_ok pass")
+
+    def test_import_venAbbName_export_ok(self):
+        """
+        输入供应商简称，导出供应商数据
+        """
+        category = ""
+        coreproduct = ""
+        factoryGrade = ""
+        factorylocation = ""
+        pageNum = ""
+        pageSize = ""
+        state = ""
+        venAbbName = "木兰"
+        vendorCode = ""
+        vensource = ""
+        ventype = ""
+
+        # 2.调用接口
+        body_data = ExportVendorAdd(category=category, coreproduct=coreproduct, factoryGrade=factoryGrade, factorylocation=factorylocation, pageNum=pageNum, pageSize=pageSize,
+                                       state=state, venAbbName=venAbbName, vendorCode=vendorCode, vensource=vensource, ventype=ventype)
+        response = self.api_vendor.get_list_export(body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "success"
+        code = 200
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response(response, code, message, False)
+        print("test_import_venAbbName_export_ok pass")
+
+    def test_import_state_export_ok(self):
+        """
+        选择供应商启用状态，导出供应商数据
+        """
+        category = ""
+        coreproduct = ""
+        factoryGrade = ""
+        factorylocation = ""
+        pageNum = ""
+        pageSize = ""
+        state = "1"
+        venAbbName = ""
+        vendorCode = ""
+        vensource = ""
+        ventype = ""
+
+        # 2.调用接口
+        body_data = ExportVendorAdd(category=category, coreproduct=coreproduct, factoryGrade=factoryGrade, factorylocation=factorylocation, pageNum=pageNum, pageSize=pageSize,
+                                       state=state, venAbbName=venAbbName, vendorCode=vendorCode, vensource=vensource, ventype=ventype)
+        response = self.api_vendor.get_list_export(body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "success"
+        code = 200
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response(response, code, message, False)
+        print("test_import_state_export_ok pass")
+
+    def test_import_ven_type_export_ok(self):
+        """
+        选择供应商类型，导出供应商数据
+        """
+        category = ""
+        coreproduct = ""
+        factoryGrade = ""
+        factorylocation = ""
+        pageNum = ""
+        pageSize = ""
+        state = "1"
+        venAbbName = ""
+        vendorCode = ""
+        vensource = ""
+        ventype = "品牌公司，有生产配套"
+
+        # 2.调用接口
+        body_data = ExportVendorAdd(category=category, coreproduct=coreproduct, factoryGrade=factoryGrade, factorylocation=factorylocation, pageNum=pageNum, pageSize=pageSize,
+                                       state=state, venAbbName=venAbbName, vendorCode=vendorCode, vensource=vensource, ventype=ventype)
+        response = self.api_vendor.get_list_export(body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "success"
+        code = 200
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response(response, code, message, False)
+        print("test_import_ven_type_export_ok pass")
 
