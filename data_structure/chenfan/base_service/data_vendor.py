@@ -225,6 +225,20 @@ class DataResVendorInfo(object):
             assert_that(data["obj"]["vendorId"], equal_to(data_req["vendorId"]))
 
 
+class DataResVendorInfo1(object):
+    """
+    返回值验证
+    """
+    def __init__(self, data, data_req=None):
+        """
+        初始化，获取格式化后的账户数据
+        data 为账户信息，dict类型，若还是json类型，则先行转换为dict；
+        data_req 为创建账户时输入的信息，dict类型（可选）
+        """
+        # 1.断言数据的完整性
+        assert_that(data, has_key('code'))
+        assert_that(data, has_key('message'))
+
 class UpdateVendorDate(BaseData):
     """
     供应商新增参数构建

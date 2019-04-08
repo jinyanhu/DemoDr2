@@ -5,6 +5,7 @@ import unittest  # 单元测试框架
 from api_call.chenfan.base_service.api_vendor import ApiVendor
 from data_structure.chenfan.base_service.data_vendor import DataVendorInfo
 from data_structure.chenfan.base_service.data_vendor import DataResVendorInfo
+from data_structure.chenfan.base_service.data_vendor import DataResVendorInfo1
 from utils.restful import Restful
 
 sys.path.insert(0, '..')
@@ -78,7 +79,7 @@ class TestDetailsVendor(unittest.TestCase):
         data_dec = self.restful.parse_response_text(response, code, message)
 
         # 4.设置数据并在内部验证完整性
-        DataResVendorInfo(data_dec)
+        DataResVendorInfo1(data_dec)
         print("test_null_vendor_id_ok pass")
 
     def test_error_vendor_id_ok(self):
