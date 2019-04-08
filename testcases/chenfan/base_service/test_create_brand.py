@@ -69,7 +69,6 @@ class TeatCreateBrand(unittest.TestCase):
         self.api_brand.delete_brand(sql=sql)
         print("test_create_brand pass")
 
-    """
     def test_create_brand_no_brandCode(self):
         
         # 准备参数
@@ -111,7 +110,7 @@ class TeatCreateBrand(unittest.TestCase):
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
         print("test_create_brand_no_brandCode pass")
-    """
+
     def test_create_brand_no_brandName(self):
         """
         不输入品牌名称创建品牌
@@ -157,7 +156,7 @@ class TeatCreateBrand(unittest.TestCase):
         DataResCreateBrand(data_dec)
         print("test_create_brand_no_brandName pass")
 
-    """"
+
     def test_create_brand_no_customerId(self):
         
         # 准备参数
@@ -193,14 +192,13 @@ class TeatCreateBrand(unittest.TestCase):
                                     lowestVendorLevel=lowestVendorLevel)
         # 调用品牌创建接口
         response = self.api_brand.create_brand(body_data=body_data)
-        code = 401
+        code = 400
         message = "创建品牌失败"
         data_dec = self.restful.parse_response_text(response, code, message)
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
         print("test_create_brand_no_customerId pass")
-    """
-    """
+
     def test_create_brand_no_customerName(self):
         
         # 准备参数
@@ -243,7 +241,6 @@ class TeatCreateBrand(unittest.TestCase):
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
         print("test_create_brand_no_customerName pass")
-    """
 
     def test_create_brand_no_magnification(self):
         """
@@ -337,7 +334,6 @@ class TeatCreateBrand(unittest.TestCase):
         DataResCreateBrand(data_dec)
         print("test_create_brand_no_lowestVendorLevel pass")
 
-    """
     def test_create_brand_no_receiveAddress(self):
         
         # 准备参数
@@ -380,4 +376,4 @@ class TeatCreateBrand(unittest.TestCase):
         # 断言接口返回的数据
         DataResCreateBrand(data_dec)
         print("test_create_brand_no_lowestVendorLevel pass")
-    """
+
