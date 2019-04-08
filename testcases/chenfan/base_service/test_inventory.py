@@ -62,6 +62,8 @@ class TestInventory(unittest.TestCase):
         message = "新增存货档案失败"
         data_dec = self.restful.parse_response_text(response, code, message)
         ResAddInventory(data_dec)
+        sql = "DELETE FROM inventory WHERE product_code = 'CH190401'"
+        self.api_inventory.delete_inventory(sql=sql)
         print("test_add_inventory pass")
 
     def test_add_inventory_repeat(self):
@@ -669,48 +671,276 @@ class TestInventory(unittest.TestCase):
                                     productCode=productCode)
         response = self.api_inventory.export_inventory(body_data=body_data)
         print("test_export_inventory_all_conditions pass")
-    """
+
     def test_edit_inventory(self):
-       
-        barcode = "CH190403M"
-        brandId = 2
-        brandName = "Chinstudio"
-        color = "黑色"
-        composition = "12"
-        compositionName = "12"
-        createBy = "325"
-        createDate = "2019-04-03"
-        createName = "张晓方"
-        implementationStandards = ""
-        invCCode = "110101"
-        invCCode1 = "11"
-        invCName = "T恤"
-        inventoryCategory = "牛仔"
-        inventoryClassId = 215
-        inventoryCode = "CH190403M"
-        inventoryId = 61435
-        inventoryName = "CH190403"
-        level = ""
-        newDate = "2019-04-29T16:00:00.000Z"
-        procodeCover = ""
-        procodeImgs = ""
-        productCode = "CH190403"
-        safetyTechnology = ""
-        season = "春"
-        size = "M"
-        state = 0
-        styleSource = "供款"
-        wmcategory = "类目一：单裙、连衣裙、裤子外套、牛仔"
-        body_data = EditInventory(barcode=barcode, brandId=brandId, brandName=brandName, color=color, composition=composition, compositionName=compositionName,
-                                  createBy=createBy, createDate=createDate, createName=createName, implementationStandards=implementationStandards, invCCode=invCCode,
-                                  invCCode1=invCCode1, invCName=invCName, inventoryCategory=inventoryCategory, inventoryClassId=inventoryClassId, inventoryCode=inventoryCode,
-                                  inventoryId=inventoryId, inventoryName=inventoryName, level=level, newDate=newDate, procodeCover=procodeCover, procodeImgs=procodeImgs,
-                                  productCode=productCode, safetyTechnology=safetyTechnology, season=season, size=size,
-                                  state=state, styleSource=styleSource, wmcategory=wmcategory)
+        """
+        正常修改存货档案
+        :return:
+        """
+        body_data = [{
+                    "barcode": "CH190403M",
+                    "color": "黑色",
+                    "inventoryCode": "CH190403M",
+                    "inventoryId": 61435,
+                    "size": "M",
+                    "state": 0,
+                    "brandId": 2,
+                    "brandName": "Chinstudio",
+                    "composition": "12",
+                    "compositionName": "12",
+                    "implementationStandards": "",
+                    "invCCode": "110101",
+                    "invCName": "T恤",
+                    "inventoryCategory": "牛仔",
+                    "inventoryClassId": 215,
+                    "inventoryName": "CH190403",
+                    "level": "",
+                    "newDate": "2019-04-29T16:00:00.000Z",
+                    "procodeCover": "",
+                    "procodeImgs": "",
+                    "productCode": "CH190403",
+                    "safetyTechnology": "",
+                    "season": "春",
+                    "styleSource": "供款",
+                    "wmcategory": "类目一：单裙、连衣裙、裤子外套、牛仔",
+                    "invCCode1": "11",
+                    "createBy": "325",
+                    "createDate": "2019-04-08",
+                    "createName": "张晓方"
+                        }]
         response = self.api_inventory.edit_inventory(body_data=body_data)
         code = 200
         message = "修改存货档案失败"
         data_dec = self.restful.parse_response_text(response, code, message)
         ResEditInventory(data_dec)
         print("test_edit_inventory pass")
+
+    def test_edit_inventory_no_productCode(self):
         """
+        修改存货档案缺少货号
+        :return:
+        """
+        body_data = [{
+                    "barcode": "CH190403M",
+                    "color": "黑色",
+                    "inventoryCode": "CH190403M",
+                    "inventoryId": 61435,
+                    "size": "M",
+                    "state": 0,
+                    "brandId": 2,
+                    "brandName": "Chinstudio",
+                    "composition": "12",
+                    "compositionName": "12",
+                    "implementationStandards": "",
+                    "invCCode": "110101",
+                    "invCName": "T恤",
+                    "inventoryCategory": "牛仔",
+                    "inventoryClassId": 215,
+                    "inventoryName": "CH190403",
+                    "level": "",
+                    "newDate": "2019-04-29T16:00:00.000Z",
+                    "procodeCover": "",
+                    "procodeImgs": "",
+                    "productCode": "",
+                    "safetyTechnology": "",
+                    "season": "春",
+                    "styleSource": "供款",
+                    "wmcategory": "类目一：单裙、连衣裙、裤子外套、牛仔",
+                    "invCCode1": "11",
+                    "createBy": "325",
+                    "createDate": "2019-04-08",
+                    "createName": "张晓方"
+                        }]
+        response = self.api_inventory.edit_inventory(body_data=body_data)
+        code = 500
+        message = "修改存货档案失败"
+        data_dec = self.restful.parse_response_text(response, code, message)
+        ResEditInventory(data_dec)
+        print("test_edit_inventory_no_productCode pass")
+
+    def test_edit_inventory_no_inventoryCode(self):
+        """
+        修改存货档案缺少存货编码id
+        :return:
+        """
+        body_data = [{
+                    "barcode": "CH190403M",
+                    "color": "黑色",
+                    "inventoryCode": "CH190403M",
+                    "inventoryId": "",
+                    "size": "M",
+                    "state": 0,
+                    "brandId": 2,
+                    "brandName": "Chinstudio",
+                    "composition": "12",
+                    "compositionName": "12",
+                    "implementationStandards": "",
+                    "invCCode": "110101",
+                    "invCName": "T恤",
+                    "inventoryCategory": "牛仔",
+                    "inventoryClassId": 215,
+                    "inventoryName": "CH190403",
+                    "level": "",
+                    "newDate": "2019-04-29T16:00:00.000Z",
+                    "procodeCover": "",
+                    "procodeImgs": "",
+                    "productCode": "CH190403",
+                    "safetyTechnology": "",
+                    "season": "春",
+                    "styleSource": "供款",
+                    "wmcategory": "类目一：单裙、连衣裙、裤子外套、牛仔",
+                    "invCCode1": "11",
+                    "createBy": "325",
+                    "createDate": "2019-04-08",
+                    "createName": "张晓方"
+                        }]
+        response = self.api_inventory.edit_inventory(body_data=body_data)
+        code = 500
+        message = "修改存货档案失败"
+        data_dec = self.restful.parse_response_text(response, code, message)
+        ResEditInventory(data_dec)
+        print("test_edit_inventory_no_inventoryCode pass")
+
+    def test_edit_inventory_add_inventory(self):
+        """
+        修改存货档案增加存货编码
+        :return:
+        """
+        body_data = [{
+                    "barcode": "CH190403M",
+                    "color": "黑色",
+                    "inventoryCode": "CH190403M",
+                    "inventoryId": 61435,
+                    "size": "M",
+                    "state": 0,
+                    "brandId": 2,
+                    "brandName": "Chinstudio",
+                    "composition": "12",
+                    "compositionName": "12",
+                    "implementationStandards": "",
+                    "invCCode": "110101",
+                    "invCName": "T恤",
+                    "inventoryCategory": "牛仔",
+                    "inventoryClassId": 215,
+                    "inventoryName": "CH190403",
+                    "level": "",
+                    "newDate": "2019-04-29T16:00:00.000Z",
+                    "procodeCover": "",
+                    "procodeImgs": "",
+                    "productCode": "CH190403",
+                    "safetyTechnology": "",
+                    "season": "春",
+                    "styleSource": "供款",
+                    "wmcategory": "类目一：单裙、连衣裙、裤子外套、牛仔",
+                    "invCCode1": "11",
+                    "createBy": "325",
+                    "createDate": "2019-04-08",
+                    "createName": "张晓方"
+                        }, {
+                    "inventoryCode": "CH190403S",
+                    "barcode": "CH190403S",
+                    "size": "L",
+                    "color": "黑色",
+                    "brandId": 2,
+                    "brandName": "Chinstudio",
+                    "composition": "12",
+                    "compositionName": "12",
+                    "implementationStandards": "",
+                    "invCCode": "110101",
+                    "invCName": "T恤",
+                    "inventoryCategory": "牛仔",
+                    "inventoryClassId": 215,
+                    "inventoryName": "CH190403",
+                    "level": "",
+                    "newDate": "2019-04-29T16:00:00.000Z",
+                    "procodeCover": "",
+                    "procodeImgs": "",
+                    "productCode": "CH190403",
+                    "safetyTechnology": "",
+                    "season": "春",
+                    "styleSource": "供款",
+                    "wmcategory": "类目一：单裙、连衣裙、裤子外套、牛仔",
+                    "invCCode1": "11",
+                    "createBy": "325",
+                    "createDate": "2019-04-08",
+                    "createName": "张晓方"
+                        }]
+        response = self.api_inventory.edit_inventory(body_data=body_data)
+        code = 200
+        message = "修改存货档案失败"
+        data_dec = self.restful.parse_response_text(response, code, message)
+        ResEditInventory(data_dec)
+        sql = "DELETE FROM inventory WHERE inventory_code = 'CH190403S'"
+        self.api_inventory.delete_inventory(sql=sql)
+        print("test_edit_inventory_no_inventoryCode pass")
+
+    def test_edit_inventory_add_repeat_inventory(self):
+        """
+        修改存货档案增加重复的存货编码
+        :return:
+        """
+        body_data = [{
+                    "barcode": "CH190403M",
+                    "color": "黑色",
+                    "inventoryCode": "CH190403M",
+                    "inventoryId": 61435,
+                    "size": "M",
+                    "state": 0,
+                    "brandId": 2,
+                    "brandName": "Chinstudio",
+                    "composition": "12",
+                    "compositionName": "12",
+                    "implementationStandards": "",
+                    "invCCode": "110101",
+                    "invCName": "T恤",
+                    "inventoryCategory": "牛仔",
+                    "inventoryClassId": 215,
+                    "inventoryName": "CH190403",
+                    "level": "",
+                    "newDate": "2019-04-29T16:00:00.000Z",
+                    "procodeCover": "",
+                    "procodeImgs": "",
+                    "productCode": "CH190403",
+                    "safetyTechnology": "",
+                    "season": "春",
+                    "styleSource": "供款",
+                    "wmcategory": "类目一：单裙、连衣裙、裤子外套、牛仔",
+                    "invCCode1": "11",
+                    "createBy": "325",
+                    "createDate": "2019-04-08",
+                    "createName": "张晓方"
+                        }, {
+                    "inventoryCode": "CH190403L",
+                    "barcode": "CH190403L",
+                    "size": "L",
+                    "color": "黑色",
+                    "brandId": 2,
+                    "brandName": "Chinstudio",
+                    "composition": "12",
+                    "compositionName": "12",
+                    "implementationStandards": "",
+                    "invCCode": "110101",
+                    "invCName": "T恤",
+                    "inventoryCategory": "牛仔",
+                    "inventoryClassId": 215,
+                    "inventoryName": "CH190403",
+                    "level": "",
+                    "newDate": "2019-04-29T16:00:00.000Z",
+                    "procodeCover": "",
+                    "procodeImgs": "",
+                    "productCode": "CH190403",
+                    "safetyTechnology": "",
+                    "season": "春",
+                    "styleSource": "供款",
+                    "wmcategory": "类目一：单裙、连衣裙、裤子外套、牛仔",
+                    "invCCode1": "11",
+                    "createBy": "325",
+                    "createDate": "2019-04-08",
+                    "createName": "张晓方"
+                        }]
+        response = self.api_inventory.edit_inventory(body_data=body_data)
+        code = 500
+        message = "修改存货档案失败"
+        data_dec = self.restful.parse_response_text(response, code, message)
+        ResEditInventory(data_dec)
+        print("test_edit_inventory_no_inventoryCode pass")
