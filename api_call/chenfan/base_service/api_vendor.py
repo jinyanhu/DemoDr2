@@ -65,6 +65,24 @@ class ApiVendor(BaseHttp):
 
         return response
 
+    def get_vendor_class_info_list(self, body_data=None):
+        """
+        获取供应商分类列表
+        """
+        # 用字典字段赋值的方式，对header某个需要变更的字段赋值
+        # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
+
+        # 将一个dict数据参数传入，直接设置为body数据，转换为json
+        if body_data:
+            body_data = body_data.get()
+
+        # 调用对应http方法，加入body参数，发送请求
+        url = self.url + "/chenfan_base/base/getVendorClassInfoList"
+        response = self.http.get(url, params=body_data)  # get方法
+        # 返回响应数据
+
+        return response
+
     def get_list_export(self, body_data=None):
         """
         导出供应商列表

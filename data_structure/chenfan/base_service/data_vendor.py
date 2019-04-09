@@ -285,3 +285,40 @@ class UpdateResVendorDate(object):
         assert_that(data, has_key('message'))
 
         # 2.根据传入的参数，进行数据正确性断言
+
+
+class DataVendorClassInfoList(BaseData):
+    """
+    获取供应商分类编码
+    """
+    def __init__(self):
+        """
+        初始化，设置各项数据
+        设置时，使用显示参数传递；若为非必填参数，可以不传
+        必填项参数
+        """
+        BaseData.__init__(self)
+        self.params = unity.copy_dict(locals())
+
+    def get(self):
+        return self.params
+
+
+# ------------- 响应值：BaseResData -------------- #
+class DataResVendorClassInfoList(object):
+    """
+    返回值验证
+    """
+    def __init__(self, data, data_req=None):
+        """
+        初始化，获取格式化后的账户数据
+        data 为账户信息，dict类型，若还是json类型，则先行转换为dict；
+        data_req 为创建账户时输入的信息，dict类型（可选）
+        """
+        # 1.断言数据的完整性
+        assert_that(data, has_key('code'))
+        assert_that(data, has_key('message'))
+        assert_that(data, has_key('obj'))
+        assert_that(data["obj"][0], has_key('vcCode'))
+        assert_that(data["obj"][0], has_key('vcId'))
+        assert_that(data["obj"][0], has_key('vcName'))

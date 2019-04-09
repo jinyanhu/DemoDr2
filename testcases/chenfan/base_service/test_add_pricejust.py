@@ -181,4 +181,347 @@ class TestAddPriceJust(unittest.TestCase):
         DataResPriceJustAdd(data_dec)
         print("test_null_inventoryCode_add_price_just_fail pass")
 
+    def test_null_inventoryId_add_price_just_fail(self):
+        """
+        不输入存货编码主键ID，创建存货调价单失败
+        """
+        gain_price_code = self.api_price_just.get_price_just_code()
+        body_data = {
+                            "detailReqModels": [
+                                                 {
+                                                    "brandId": 2,
+                                                    "brandName": "chinstudio",
+                                                    "color": "黑",
+                                                    "factoryQuote": "100",
+                                                    "inventoryCode": "CH0001230BKS",
+                                                    "inventoryId": "",
+                                                    "inventoryName": "测试CH0001230",
+                                                    "newDate": "2019-03-26",
+                                                    "productCode": "CH0001230",
+                                                    "remark": "100000",
+                                                    "season": "夏",
+                                                    "size": "S",
+                                                    "taxRate": "13",
+                                                    "taxUnitPrice": "100",
+                                                    "unitPrice": "88.4956",
+                                                    "vendorCode": "00229",
+                                                    "vendorId": "63"
+                                                 }
+                                            ],
+                            "mainReqModel": {
+                                                    "ddate": "2019-04-04",
+                                                    "maker": "金严虎测试",
+                                                    "priceJustCode": "{}".format(gain_price_code)
+                                            }
+
+                        }
+
+        # 2.调用接口
+        response = self.api_price_just.post_add_price(body_data=body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "存货编码主键不能为空"
+        code = 400
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response_text(response, code, message)
+
+        # 4.设置数据并在内部验证完整性
+        DataResPriceJustAdd(data_dec)
+        print("test_null_inventoryId_add_price_just_fail pass")
+
+    def test_null_taxUnitPrice_add_price_just_fail(self):
+        """
+        不输入含税单价，创建存货调价单失败
+        """
+        gain_price_code = self.api_price_just.get_price_just_code()
+        body_data = {
+                            "detailReqModels": [
+                                                 {
+                                                    "brandId": 2,
+                                                    "brandName": "chinstudio",
+                                                    "color": "黑",
+                                                    "factoryQuote": "100",
+                                                    "inventoryCode": "CH0001230BKS",
+                                                    "inventoryId": "61308",
+                                                    "inventoryName": "测试CH0001230",
+                                                    "newDate": "2019-03-26",
+                                                    "productCode": "CH0001230",
+                                                    "remark": "100000",
+                                                    "season": "夏",
+                                                    "size": "S",
+                                                    "taxRate": "13",
+                                                    "taxUnitPrice": "",
+                                                    "unitPrice": "88.4956",
+                                                    "vendorCode": "00229",
+                                                    "vendorId": "63"
+                                                 }
+                                            ],
+                            "mainReqModel": {
+                                                    "ddate": "2019-04-04",
+                                                    "maker": "金严虎测试",
+                                                    "priceJustCode": "{}".format(gain_price_code)
+                                            }
+
+                        }
+
+        # 2.调用接口
+        response = self.api_price_just.post_add_price(body_data=body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "含税单价不能为空"
+        code = 400
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response_text(response, code, message)
+
+        # 4.设置数据并在内部验证完整性
+        DataResPriceJustAdd(data_dec)
+        print("test_null_taxUnitPrice_add_price_just_fail pass")
+
+    def test_null_vendorCode_add_price_just_fail(self):
+        """
+        不输入供应商编码，创建存货调价单失败
+        """
+        gain_price_code = self.api_price_just.get_price_just_code()
+        body_data = {
+                            "detailReqModels": [
+                                                 {
+                                                    "brandId": 2,
+                                                    "brandName": "chinstudio",
+                                                    "color": "黑",
+                                                    "factoryQuote": "100",
+                                                    "inventoryCode": "CH0001230BKS",
+                                                    "inventoryId": "61308",
+                                                    "inventoryName": "测试CH0001230",
+                                                    "newDate": "2019-03-26",
+                                                    "productCode": "CH0001230",
+                                                    "remark": "100000",
+                                                    "season": "夏",
+                                                    "size": "S",
+                                                    "taxRate": "13",
+                                                    "taxUnitPrice": "100",
+                                                    "unitPrice": "88.4956",
+                                                    "vendorCode": "",
+                                                    "vendorId": "63"
+                                                 }
+                                            ],
+                            "mainReqModel": {
+                                                    "ddate": "2019-04-04",
+                                                    "maker": "金严虎测试",
+                                                    "priceJustCode": "{}".format(gain_price_code)
+                                            }
+
+                        }
+
+        # 2.调用接口
+        response = self.api_price_just.post_add_price(body_data=body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "供应商编码不能为空"
+        code = 400
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response_text(response, code, message)
+
+        # 4.设置数据并在内部验证完整性
+        DataResPriceJustAdd(data_dec)
+        print("test_null_vendorCode_add_price_just_fail pass")
+
+    def test_null_priceJustCode_add_price_just_fail(self):
+        """
+        不输入调价单号，创建存货调价单失败
+        """
+        gain_price_code = self.api_price_just.get_price_just_code()
+        body_data = {
+                            "detailReqModels": [
+                                                 {
+                                                    "brandId": 2,
+                                                    "brandName": "chinstudio",
+                                                    "color": "黑",
+                                                    "factoryQuote": "100",
+                                                    "inventoryCode": "CH0001230BKS",
+                                                    "inventoryId": "61308",
+                                                    "inventoryName": "测试CH0001230",
+                                                    "newDate": "2019-03-26",
+                                                    "productCode": "CH0001230",
+                                                    "remark": "",
+                                                    "season": "夏",
+                                                    "size": "S",
+                                                    "taxRate": "13",
+                                                    "taxUnitPrice": "100",
+                                                    "unitPrice": "88.4956",
+                                                    "vendorCode": "00228",
+                                                    "vendorId": "63"
+                                                 }
+                                            ],
+                            "mainReqModel": {
+                                                    "ddate": "2019-04-04",
+                                                    "maker": "金严虎测试",
+                                                    "priceJustCode": ""
+                                            }
+
+                        }
+
+        # 2.调用接口
+        response = self.api_price_just.post_add_price(body_data=body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "调价单号不能为空"
+        code = 400
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response_text(response, code, message)
+
+        # 4.设置数据并在内部验证完整性
+        DataResPriceJustAdd(data_dec)
+        print("test_null_priceJustCode_add_price_just_fail pass")
+
+    def test_null_taxRate_add_price_just_fail(self):
+        """
+        不输入税率，创建存货调价单失败
+        """
+        gain_price_code = self.api_price_just.get_price_just_code()
+        body_data = {
+                            "detailReqModels": [
+                                                 {
+                                                    "brandId": 2,
+                                                    "brandName": "chinstudio",
+                                                    "color": "黑",
+                                                    "factoryQuote": "100",
+                                                    "inventoryCode": "CH0001230BKS",
+                                                    "inventoryId": "61308",
+                                                    "inventoryName": "测试CH0001230",
+                                                    "newDate": "2019-03-26",
+                                                    "productCode": "CH0001230",
+                                                    "remark": "100000",
+                                                    "season": "夏",
+                                                    "size": "S",
+                                                    "taxRate": "",
+                                                    "taxUnitPrice": "100",
+                                                    "unitPrice": "88.4956",
+                                                    "vendorCode": "00228",
+                                                    "vendorId": "63"
+                                                 }
+                                            ],
+                            "mainReqModel": {
+                                                    "ddate": "2019-04-04",
+                                                    "maker": "金严虎测试",
+                                                    "priceJustCode": "{}".format(gain_price_code)
+                                            }
+
+                        }
+
+        # 2.调用接口
+        response = self.api_price_just.post_add_price(body_data=body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "税率不能为空"
+        code = 400
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response_text(response, code, message)
+
+        # 4.设置数据并在内部验证完整性
+        DataResPriceJustAdd(data_dec)
+        print("test_null_taxRate_add_price_just_fail pass")
+
+    def test_null_unitPrice_add_price_just_fail(self):
+        """
+        不输入不含税单价，创建存货调价单失败
+        """
+        gain_price_code = self.api_price_just.get_price_just_code()
+        body_data = {
+                            "detailReqModels": [
+                                                 {
+                                                    "brandId": 2,
+                                                    "brandName": "chinstudio",
+                                                    "color": "黑",
+                                                    "factoryQuote": "100",
+                                                    "inventoryCode": "CH0001230BKS",
+                                                    "inventoryId": "61308",
+                                                    "inventoryName": "测试CH0001230",
+                                                    "newDate": "2019-03-26",
+                                                    "productCode": "CH0001230",
+                                                    "remark": "100000",
+                                                    "season": "夏",
+                                                    "size": "S",
+                                                    "taxRate": "13",
+                                                    "taxUnitPrice": "100",
+                                                    "unitPrice": "",
+                                                    "vendorCode": "00228",
+                                                    "vendorId": "63"
+                                                 }
+                                            ],
+                            "mainReqModel": {
+                                                    "ddate": "2019-04-04",
+                                                    "maker": "金严虎测试",
+                                                    "priceJustCode": "{}".format(gain_price_code)
+                                            }
+
+                        }
+
+        # 2.调用接口
+        response = self.api_price_just.post_add_price(body_data=body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "不含税单价不能为空"
+        code = 400
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response_text(response, code, message)
+
+        # 4.设置数据并在内部验证完整性
+        DataResPriceJustAdd(data_dec)
+        print("test_null_unitPrice_add_price_just_fail pass")
+
+    def test_null_vendorId_add_price_just_fail(self):
+        """
+        不输入供应商ID，创建存货调价单失败
+        """
+        gain_price_code = self.api_price_just.get_price_just_code()
+        body_data = {
+                            "detailReqModels": [
+                                                 {
+                                                    "brandId": 2,
+                                                    "brandName": "chinstudio",
+                                                    "color": "黑",
+                                                    "factoryQuote": "100",
+                                                    "inventoryCode": "CH0001230BKS",
+                                                    "inventoryId": "61308",
+                                                    "inventoryName": "测试CH0001230",
+                                                    "newDate": "2019-03-26",
+                                                    "productCode": "CH0001230",
+                                                    "remark": "100000",
+                                                    "season": "夏",
+                                                    "size": "S",
+                                                    "taxRate": "13",
+                                                    "taxUnitPrice": "100",
+                                                    "unitPrice": "88.4956",
+                                                    "vendorCode": "00228",
+                                                    "vendorId": ""
+                                                 }
+                                            ],
+                            "mainReqModel": {
+                                                    "ddate": "2019-04-04",
+                                                    "maker": "金严虎测试",
+                                                    "priceJustCode": "{}".format(gain_price_code)
+                                            }
+
+                        }
+
+        # 2.调用接口
+        response = self.api_price_just.post_add_price(body_data=body_data)
+
+        # 3.获取响应数据，判断状态码，并获取“data”
+        message = "供应商ID不能为空"
+        code = 400
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response_text(response, code, message)
+
+        # 4.设置数据并在内部验证完整性
+        DataResPriceJustAdd(data_dec)
+        print("test_null_vendorId_add_price_just_fail pass")
+
 

@@ -23,16 +23,13 @@ class ApiPriceJust(BaseHttp):
 
     # ####################### 以下的每个方法，对应封装一个接口的调用过程 ################### #
 
-    def post_add_price(self, body_data=None):
+    def update_price_just(self, sql):
         """
-        新增供应商
-        """
-        # 调用对应http方法，加入body参数，发送请求
-        url = self.url + "/chenfan_base/priceJust/add"
-        response = self.http.post(url=url, body=body_data, headers=self.header)       # post方法
 
-        # 返回响应数据
-        return response
+        :param sql: sql语句
+        :return:
+        """
+        self.database.update(sql=sql)
 
     def get_price_just_code(self, body_data=None):
         """
@@ -56,9 +53,24 @@ class ApiPriceJust(BaseHttp):
         print(price_code)
         return price_code
 
-    def get_list(self, body_data=None):
+    def post_add_price(self, body_data=None):
         """
-        获取供应商列表
+        新增存货调价单
+        """
+        # 用字典字段赋值的方式，对header某个需要变更的字段赋值
+        # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
+
+        # 将一个dict数据参数传入，直接设置为body数据，转换为json
+        # 调用对应http方法，加入body参数，发送请求
+        url = self.url + "/chenfan_base/priceJust/add"
+        response = self.http.post(url=url, body=body_data, headers=self.header)       # post方法
+
+        # 返回响应数据
+        return response
+
+    def get_detail(self, body_data=None):
+        """
+        获取存货调价单详情
         """
         # 用字典字段赋值的方式，对header某个需要变更的字段赋值
         # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
@@ -68,15 +80,15 @@ class ApiPriceJust(BaseHttp):
             body_data = body_data.get()
 
         # 调用对应http方法，加入body参数，发送请求
-        url = self.url + "/chenfan_base/vendor/getList"
+        url = self.url + "/chenfan_base/priceJust/getInfo"
         response = self.http.get(url, params=body_data)  # get方法
         # 返回响应数据
 
         return response
 
-    def get_list_export(self, body_data=None):
+    def get_price_just_list(self, body_data=None):
         """
-        导出供应商列表
+        获取存货调价单列表
         """
         # 用字典字段赋值的方式，对header某个需要变更的字段赋值
         # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
@@ -86,15 +98,33 @@ class ApiPriceJust(BaseHttp):
             body_data = body_data.get()
 
         # 调用对应http方法，加入body参数，发送请求
-        url = self.url + "/chenfan_base/vendor/export"
+        url = self.url + "/chenfan_base/priceJust/getList"
+        response = self.http.get(url, params=body_data)  # get方法
+        # 返回响应数据
+
+        return response
+
+    def get_price_just_export(self, body_data=None):
+        """
+        导出存货调价单
+        """
+        # 用字典字段赋值的方式，对header某个需要变更的字段赋值
+        # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
+
+        # 将一个dict数据参数传入，直接设置为body数据，转换为json
+        if body_data:
+            body_data = body_data.get()
+
+        # 调用对应http方法，加入body参数，发送请求
+        url = self.url + "/chenfan_base/priceJust/export"
         response = self.http.get(url, params=body_data)  # get方法
 
         # 返回响应数据
         return response
 
-    def put(self, body_data=None):
+    def put_update(self, body_data=None):
         """
-        获取供应商禁用启用状态
+        存货调价单审核
         """
         # 用字典字段赋值的方式，对header某个需要变更的字段赋值
         # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
@@ -104,15 +134,15 @@ class ApiPriceJust(BaseHttp):
             body_data = body_data.get()
 
         # 调用对应http方法，加入body参数，发送请求
-        url = self.url + "/chenfan_base/vendor/switchBanVendor"
+        url = self.url + "/chenfan_base/priceJust/review"
         response = self.http.put(url, body=body_data, headers=self.header)  # put方法
 
         # 返回响应数据
         return response
 
-    def get_vendor_details(self, body_data=None):
+    def put_price_just_confirm(self, body_data=None):
         """
-        获取供应商详情
+        存货调价单确认
         """
         # 用字典字段赋值的方式，对header某个需要变更的字段赋值
         # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
@@ -122,8 +152,8 @@ class ApiPriceJust(BaseHttp):
             body_data = body_data.get()
 
         # 调用对应http方法，加入body参数，发送请求
-        url = self.url + "/chenfan_base/vendor/getInfo"
-        response = self.http.get(url, params=body_data)  # get方法
+        url = self.url + "/chenfan_base/priceJust/confirm"
+        response = self.http.put(url, body=body_data, headers=self.header)  # put方法
 
         # 返回响应数据
         return response
@@ -135,19 +165,16 @@ class ApiPriceJust(BaseHttp):
         """
         self.database.update(sql=sql)
 
-    def put_update_vendor(self, body_data=None):
+    def put_update_price_just(self, body_data=None):
         """
-        获取供应商禁用启用状态
+        修改存货调价单接口
         """
         # 用字典字段赋值的方式，对header某个需要变更的字段赋值
         # tag是预留给伪接口的标志，若不使用伪接口，tag可以删掉
 
         # 将一个dict数据参数传入，直接设置为body数据，转换为json
-        if body_data:
-            body_data = body_data.get()
-
         # 调用对应http方法，加入body参数，发送请求
-        url = self.url + "/chenfan_base/vendor/update"
+        url = self.url + "/chenfan_base/priceJust/update"
         response = self.http.put(url, body=body_data, headers=self.header)  # put方法
 
         # 返回响应数据

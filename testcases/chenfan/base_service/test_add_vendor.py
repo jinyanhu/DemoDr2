@@ -77,7 +77,7 @@ class TestAddVendor(unittest.TestCase):
         data_dec = self.restful.parse_response_text(response, code, message)
 
         # 4.设置数据并在内部验证完整性
-        # DataResVendorAdd(data_dec)
+        DataResVendorAdd(data_dec)
         # sql = "DELETE FROM vendor WHERE vendor_code = '{}'".format(vendorCode)
         # sql_server = "delete from vendor where cVenCode='{}'".format(vendorCode)
         # self.api_vendor.delete_vendor(sql, sql_server)
