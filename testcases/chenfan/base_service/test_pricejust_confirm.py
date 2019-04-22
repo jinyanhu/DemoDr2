@@ -11,7 +11,7 @@ from utils.restful import Restful
 sys.path.insert(0, '..')
 
 
-class TestPriceJustUpdate(unittest.TestCase):
+class TestPriceJustConfirm(unittest.TestCase):
     """
      存货调价单审核接口
     """

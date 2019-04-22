@@ -35,54 +35,54 @@ class TestAddVendor(unittest.TestCase):
         """
         pass
 
-    def test_add_vendor_ok(self):
-        """
-        输入所有必填项，正常新增供应商
-        """
-        # 1.准备必填的参数，有些非必选的参数可以不填
-        """
-        获取随机的5位纯数字当做供应商编码
-        """
-        # str = ""
-        # for i in range(5):
-        #     ch = chr(random.randrange(ord('0'),ord('9') + 1))
-        #     str += ch
-        int_5 = str(random.randint(10000, 99999))
-        cvenAddress = "测试"
-        cvenHand = "17610225668"
-        cvenPerson = "测试"
-        vcCode = "01"
-        vcId = "1"
-        vcIdS = "1-01"
-        venAbbName = int_5
-        vendorCode = int_5
-        vendorName = int_5
-        vensource = "招标渠道"
-        factorylocation = "大店"
-        vendorFiles = []
-
-        # 调用数据处理类，将参数合并到字典中
-        body_data = DataVendorAdd(cvenAddress=cvenAddress, cvenHand=cvenHand, cvenPerson=cvenPerson, vcCode=vcCode,
-                                  vcId=vcId, vcIdS=vcIdS, venAbbName=venAbbName,factorylocation=factorylocation,
-                                  vendorCode=vendorCode, vendorName=vendorName, vensource=vensource, vendorFiles=vendorFiles)
-
-        # 2.调用接口
-        response = self.api_vendor.post(body_data)
-
-        # 3.获取响应数据，判断状态码，并获取“data”
-        message = "success"
-        code = 200
-        # 将返回解析后转换成dict的data数据
-        # 若返回值不符合期望的状态码，message指明错误类型
-        data_dec = self.restful.parse_response_text(response, code, message)
-
-        # 4.设置数据并在内部验证完整性
-        DataResVendorAdd(data_dec)
-        # sql = "DELETE FROM vendor WHERE vendor_code = '{}'".format(vendorCode)
-        # sql_server = "delete from vendor where cVenCode='{}'".format(vendorCode)
-        # self.api_vendor.delete_vendor(sql, sql_server)
-
-        print("test_add_vendor_ok pass")
+    # def test_add_vendor_ok(self):
+    #     """
+    #     输入所有必填项，正常新增供应商
+    #     """
+    #     # 1.准备必填的参数，有些非必选的参数可以不填
+    #     """
+    #     获取随机的5位纯数字当做供应商编码
+    #     """
+    #     # str = ""
+    #     # for i in range(5):
+    #     #     ch = chr(random.randrange(ord('0'),ord('9') + 1))
+    #     #     str += ch
+    #     int_5 = str(random.randint(10000, 99999))
+    #     cvenAddress = "测试"
+    #     cvenHand = "17610225668"
+    #     cvenPerson = "测试"
+    #     vcCode = "01"
+    #     vcId = "1"
+    #     vcIdS = "1-01"
+    #     venAbbName = int_5
+    #     vendorCode = int_5
+    #     vendorName = int_5
+    #     vensource = "招标渠道"
+    #     factorylocation = "大店"
+    #     vendorFiles = []
+    #
+    #     # 调用数据处理类，将参数合并到字典中
+    #     body_data = DataVendorAdd(cvenAddress=cvenAddress, cvenHand=cvenHand, cvenPerson=cvenPerson, vcCode=vcCode,
+    #                               vcId=vcId, vcIdS=vcIdS, venAbbName=venAbbName,factorylocation=factorylocation,
+    #                               vendorCode=vendorCode, vendorName=vendorName, vensource=vensource, vendorFiles=vendorFiles)
+    #
+    #     # 2.调用接口
+    #     response = self.api_vendor.post(body_data)
+    #
+    #     # 3.获取响应数据，判断状态码，并获取“data”
+    #     message = "success"
+    #     code = 200
+    #     # 将返回解析后转换成dict的data数据
+    #     # 若返回值不符合期望的状态码，message指明错误类型
+    #     data_dec = self.restful.parse_response_text(response, code, message)
+    #
+    #     # 4.设置数据并在内部验证完整性
+    #     DataResVendorAdd(data_dec)
+    #     # sql = "DELETE FROM vendor WHERE vendor_code = '{}'".format(vendorCode)
+    #     # sql_server = "delete from vendor where cVenCode='{}'".format(vendorCode)
+    #     # self.api_vendor.delete_vendor(sql, sql_server)
+    #
+    #     print("test_add_vendor_ok pass")
 
     def test_add_vendor_no_vendorCode_fail(self):
         """
