@@ -343,7 +343,7 @@ class TeatPublic(unittest.TestCase):
         禁用多个存货档案
         :return:
         """
-        inventoryIds = [61430, 61431, 61432, 61433, 61434]
+        inventoryIds = [61430, 61431, 61432, 61433]
         state = "1"
         body_data = SwitchState(inventoryIds=inventoryIds, state=state)
         response = self.api_inventory.switch_state(body_data=body_data)
@@ -358,7 +358,7 @@ class TeatPublic(unittest.TestCase):
         启用多个存货档案
         :return:
         """
-        inventoryIds = [61430, 61431, 61432, 61433, 61434]
+        inventoryIds = [61430, 61431, 61432, 61433]
         state = "0"
         body_data = SwitchState(inventoryIds=inventoryIds, state=state)
         response = self.api_inventory.switch_state(body_data=body_data)

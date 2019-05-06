@@ -151,7 +151,7 @@ class TestInventory(unittest.TestCase):
         message = "新增存货档案失败"
         data_dec = self.restful.parse_response_text(response, code, message)
         ResAddInventory(data_dec)
-        print("test_add_inventory_repeat pass")
+        print("test_add_inventory_no_productCode pass")
 
     def test_add_inventory_repeat_productCode(self):
         """
@@ -193,7 +193,7 @@ class TestInventory(unittest.TestCase):
         message = "新增存货档案失败"
         data_dec = self.restful.parse_response_text(response, code, message)
         ResAddInventory(data_dec)
-        print("test_add_inventory_repeat pass")
+        print("test_add_inventory_repeat_productCode pass")
 
     def test_get_inventory_list(self):
         """
