@@ -1,4 +1,4 @@
-__author__ = 'ZZH'
+
 
 """
 该模块封装属于当前服务的http基本操作
@@ -13,20 +13,19 @@ class BaseHttp(object):
         self.header = {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "user_ip": "101.69.247.106",
-            "user_agent": "pc"
+            # "user_ip": "101.69.247.106",
+            # "user_agent": "pc"
         }
 
         # 2.读取配置
         # 读取的配置文件的名称
         my_cfg = MyCfg('chenfan.ini')
         # 配置段的名称
-        my_cfg.set_section('chenfan_api')
+        my_cfg.set_section('esb_api')
         # 根据key读value
         self.host = my_cfg.get('host')
         self.port = my_cfg.get('port')
         self.url = "http://" + self.host + ":" + self.port
-
 
 
 

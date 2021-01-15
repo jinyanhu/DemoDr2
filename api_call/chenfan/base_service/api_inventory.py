@@ -123,6 +123,9 @@ class ApiInventory(BaseHttp):
         return response
 
     def export_inventory(self, body_data):
+
+
+
         """
         按合格证模板导出
         :param body_data:
