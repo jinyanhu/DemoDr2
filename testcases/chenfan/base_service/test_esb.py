@@ -2,6 +2,7 @@
 
 import sys
 import unittest  # 单元测试框架
+import time
 
 from api_call.chenfan.base_service.api_route import ApiRoute
 from data_structure.chenfan.base_service.data_esb import DataRouteEsb
@@ -15,6 +16,8 @@ class TestEsbReturn(unittest.TestCase):
     """
     esb接口
     """
+
+
     def setUp(self):
         """
         测试类的构造方法
@@ -38,6 +41,7 @@ class TestEsbReturn(unittest.TestCase):
         """
         esb请求
         """
+        time_order = int(round(time.time() * 1000))
         body_data = {
                     "assurerNo": "S36025528",
                     "sign": "",
@@ -47,7 +51,7 @@ class TestEsbReturn(unittest.TestCase):
                     "data": {
                         "pub": {
                             "bankCode": "0180400023",
-                            "assurerNo": "S36025528",
+                            "assurerNo": time_order,
                             "platNo": "platNo",
                             "orderNo": "ESB1706989",
                             "bankType": "ICBC",
@@ -133,7 +137,6 @@ class TestEsbReturn(unittest.TestCase):
                 }
         # 2.调用接口
         response = self.api_route.esb_encrypt(body_data=body_data)
-
         # 3.获取响应数据，判断状态码，并获取“data”
         msg = "success"
         code = 0
@@ -141,7 +144,35 @@ class TestEsbReturn(unittest.TestCase):
         # 若返回值不符合期望的状态码，message指明错误类型
         data_dec = self.restful.parse_response_text(response, code, msg)
 
+
         # 4.设置数据并在内部验证完整性
         DataResEsb(data_dec)
         print("test_esb pass")
+        return data_dec
+
+    # 短融ESB转发南方机构进件到E分期
+    def test_route(self):
+        data_json = self.test_esb()
+        data1 = data_json["data"]["data"]
+        sign2 = data_json["data"]["sign"]
+        body_data = {
+
+                "assurerNo": "D36024345",
+                "bankType": "ICBC",
+                "busiCode": "1001",
+                "data":data1,
+                "sign":sign2,
+                "platNo": "nanfang"
+        }
+        response = self.api_route.route(body_data=body_data,headers=None)
+        # 返回值转化成json格式
+        response_json=response.json()
+        # 提取E分期订单号
+        OrderNo = response_json["data"]["estageOrderNo"]
+        print(OrderNo)
+        print("订单号success")
+        return OrderNo
+
+
+
 

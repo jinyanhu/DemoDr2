@@ -55,7 +55,7 @@ def set_case_list():
     从命令行读取需要运行的测试集，返回测试集列表
     """
     argvs = sys.argv
-    # argvs = ['runner.py', 'case_assert']     # 调试用
+    # argvs = ['runner.py', 'case_1']     # 调试用
 
     if len(argvs) <= 1:         # 没有指定测试用例集，默认运行所有测试用例（nose自动识别）
         print("no specified cases, could run all cases")
@@ -64,7 +64,6 @@ def set_case_list():
     if argvs[1] == "--all":     # 运行配置文件中的所有用例集（待实现）
         print("run all cases specified in json file")
         return None
-
     # 读suites.json配置文件，获取所有划分的测试集
     cof_file = open(suite_config)
     case_set = json.load(cof_file)

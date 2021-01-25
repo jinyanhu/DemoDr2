@@ -28,6 +28,50 @@ class ApiRoute(BaseHttp):
         response = self.http.post(url=url,body=body_data)
         return response
 
+    def route(self,body_data,headers):
+        """
+        短融ESB转发给E分期
+        :return:
+        """
+        # 请求的地址
+        url = "http://" + "192.168.0.104" + ":" + "9501" + "/bank/route"
+        # 请求征信进件接口得到返回值
+        response = self.http.post(url=url,body=body_data,headers=headers)
+        return response
+
+    def e_login(self,body_data):
+        """
+        登录E分期
+        :return:
+        """
+        # 请求的地址
+        url = "http://" + "14.17.122.160" + ":" + "19081" + "/login/doLogin"
+        # 登录E分期
+        response = self.http.post(url=url,body=body_data)
+        return response
+
+    def task_id(self,body_data,header):
+        """
+        获取taskid
+        :return:
+        """
+        # 请求的地址
+        url = "http://" + "14.17.122.160" + ":" + "19081" + "/loanOrder/workbench"
+        # 获取taskid
+        response = self.http.post(url=url,body=body_data,headers=header)
+        return response
+
+    def complete(self, body_data):
+        """
+        征信授权
+        :return:
+        """
+        # 请求的地址
+        url = "http://" + "14.17.122.160" + ":" + "19081" + "/tasks/complete"
+        # 登录E分期
+        response = self.http.post(url=url, body=body_data)
+        return response
+
     # def delete_brand(self, sql):
     #     """
     #
