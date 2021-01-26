@@ -61,15 +61,15 @@ class ApiRoute(BaseHttp):
         response = self.http.post(url=url,body=body_data,headers=header)
         return response
 
-    def complete(self, body_data):
+    def complete(self, body_data,header):
         """
         征信授权
         :return:
         """
         # 请求的地址
         url = "http://" + "14.17.122.160" + ":" + "19081" + "/tasks/complete"
-        # 登录E分期
-        response = self.http.post(url=url, body=body_data)
+        # 进行征信授权
+        response = self.http.post(url=url, body=body_data,headers=header)
         return response
 
     # def delete_brand(self, sql):

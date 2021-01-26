@@ -38,7 +38,7 @@ class TestEsbReturn(unittest.TestCase):
         """
         pass
 
-    def test_esb(self):
+    def esb(self):
         """
         esb请求
         """
@@ -152,8 +152,8 @@ class TestEsbReturn(unittest.TestCase):
         return data_dec
 
     # 短融ESB转发南方机构进件到E分期
-    def test_route(self):
-        data_json = self.test_esb()
+    def route(self):
+        data_json = self.esb()
         data1 = data_json["data"]["data"]
         sign2 = data_json["data"]["sign"]
         body_data = {
@@ -174,7 +174,7 @@ class TestEsbReturn(unittest.TestCase):
         print("订单号success")
         return OrderNo
 
-    def test_login(self):
+    def login(self):
         """
         登录E分期
         """
@@ -193,39 +193,85 @@ class TestEsbReturn(unittest.TestCase):
         code = 0
         # 将返回解析后转换成dict的data数据
         # 若返回值不符合期望的状态码，message指明错误类型
-        data_dec = self.restful.parse_response_text(response, code, msg)
+        # data_dec = self.restful.parse_response_text(response, code, msg)
+        data_dec = response.json()
 
 
         # 4.设置数据并在内部验证完整性
-        DataResEsb(data_dec)
+        # DataResEsb(data_dec)
         print("login pass")
         return data_dec
 
     # 获取taskid
-    def test_taskid(self):
-        token_data = self.test_login()
+    def taskid(self):
+        token_data = self.login()
         token = token_data["data"]["token"]
+        print(token)
         header = {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": "Bearer" + " " + "{}".format(token)
+
+                "Authorization": "Bearer" + " " "{}".format(token),
+                "Content-Type": "application/x-www-form-urlencoded",
         }
-        orderno = self.test_route()
-        FomData = {
+        orderno = self.route()
+        body_data = {
 
                 # "fuzzyParam": "vx001002001803293333848854528",
                 "fuzzyParam": orderno,
-                "checkType": "0"
+                "checkType": 0
         }
-        data = parse.urlencode(FomData)
-        response = self.api_route.task_id(body_data=data,header=header)
-        # 返回值转化成json格式
-        response_json=response.json()
-        print(response_json)
+        msg = "success"
+        code = 0
+        response = self.api_route.task_id(body_data=body_data,header=header)
+        # data_dec = self.restful.parse_response_text(response, code, msg)
+        data_dec = response.json()
+        print(data_dec)
+        return data_dec
+
+    def test_complete(self):
+        """
+        征信授权
+        """
+        token_data = self.login()
+        token = token_data["data"]["token"]
+        print(token)
+        task_data = self.taskid()
+        taskid = task_data["data"][0]["id"]
+        orderno = task_data["data"][0]["loanTasks"][0]["orderNo"]
+        print(orderno)
+        print(taskid)
+        header = {
+
+            "Authorization": "Bearer" + " " "{}".format(token)
+        }
+        # orderno = self.route()
+
+        body_data = {
+                "taskId": taskid,
+                "taskIds": [taskid],
+                "orderNo": orderno
+        }
+        # 2.调用接口
+        response = self.api_route.complete(body_data=body_data,header=header)
+        # 3.获取响应数据，判断状态码，并获取“data”
+        msg = "success"
+        code = 0
+        # 将返回解析后转换成dict的data数据
+        # 若返回值不符合期望的状态码，message指明错误类型
+        data_dec = self.restful.parse_response_text(response, code, msg)
+        # data_dec = response.text
+
+        print(data_dec)
+
+
+        # 4.设置数据并在内部验证完整性
+        # DataResEsb(data_dec)
+        print("授权成功 ")
+        return data_dec
 
 if __name__ == '__main__':
 
     test = TestEsbReturn()
-    test.test_taskid()
+    test.test_complete()
 
 
 
